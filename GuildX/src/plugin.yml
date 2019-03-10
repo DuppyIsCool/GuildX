@@ -1,0 +1,11 @@
+name: GuildX
+main: me.Dupps.GuildX.Main.Main
+author: Dupps
+version: 1.0
+api-version: 1.13
+description: Guilds plugin by DuppyIsCool
+commands:
+    guild:
+        description: Base command used for all guild related commands.
+        usage: /<command>
+        aliases: [g,guilds]
