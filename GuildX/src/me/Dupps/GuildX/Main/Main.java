@@ -24,8 +24,10 @@ public class Main extends JavaPlugin{
 		//Sets up guilds and guild configuration
 		getConfig().options().copyDefaults(true);
 		loadConfigManager();
+		loadConfig(); 
 		getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "GuildX has been enabled");
 		guildmanager.setupGuilds();
+		saveConfig();
 	}
 	
 	public void onDisable() {
@@ -39,6 +41,10 @@ public class Main extends JavaPlugin{
 	public void loadConfigManager() {
 		cfgm = new ConfigManager();
 		cfgm.setup();
+	}
+	public void loadConfig() {
+		getConfig().options().copyDefaults(true);
+		saveConfig();
 	}
 
 }

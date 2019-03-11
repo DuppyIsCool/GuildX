@@ -41,11 +41,11 @@ public class GuildMethods {
 	
 	public Guild getGuildwPlayer(String puuid) {
 		for(Guild g : GuildManager.getGuilds()) {
-			if(g.getLeader().equalsIgnoreCase(puuid))
+			if(!g.getLeader().equals(null) && g.getLeader().equalsIgnoreCase(puuid))
 				return g;
-			if(g.getAdmins().contains(puuid))
+			if(!g.getAdmins().equals(null) && g.getAdmins().contains(puuid))
 				return g;
-			if(g.getMembers().contains(puuid))
+			if(!g.getMembers().equals(null) && g.getMembers().contains(puuid))
 				return g;
 		}
 		return null;
@@ -53,11 +53,11 @@ public class GuildMethods {
 	
 	public boolean isAdmin(String puuid) {
 		for(Guild g : GuildManager.getGuilds()) {
-			if(g.getLeader().equalsIgnoreCase(puuid))
+			if(!g.getLeader().equals(null) && g.getLeader().equalsIgnoreCase(puuid))
 				return false;
-			if(g.getAdmins().contains(puuid))
+			if(!g.getAdmins().equals(null) && g.getAdmins().contains(puuid))
 				return true;
-			if(g.getMembers().contains(puuid))
+			if(!g.getMembers().equals(null) && g.getMembers().contains(puuid))
 				return false;
 		}
 		
@@ -66,11 +66,11 @@ public class GuildMethods {
 	
 	public boolean isLeader(String puuid) {
 		for(Guild g : GuildManager.getGuilds()) {
-			if(g.getLeader().equalsIgnoreCase(puuid))
+			if(!g.getLeader().equals(null) && g.getLeader().equalsIgnoreCase(puuid))
 				return true;
-			if(g.getAdmins().contains(puuid))
+			if(!g.getAdmins().equals(null) && g.getAdmins().contains(puuid))
 				return false;
-			if(g.getMembers().contains(puuid))
+			if(!g.getMembers().equals(null) && g.getMembers().contains(puuid))
 				return false;
 		}
 		
@@ -79,16 +79,15 @@ public class GuildMethods {
 	
 	public boolean isMember(String puuid) {
 		for(Guild g : GuildManager.getGuilds()) {
-			if(g.getLeader().equalsIgnoreCase(puuid))
+			if(!g.getLeader().equals(null) && g.getLeader().equalsIgnoreCase(puuid))
 				return false;
-			if(g.getAdmins().contains(puuid))
+			if(!g.getAdmins().equals(null) && g.getAdmins().contains(puuid))
 				return false;
-			if(g.getMembers().contains(puuid))
+			if(!g.getMembers().equals(null) && g.getMembers().contains(puuid))
 				return true;
 		}
 		
 		return false;
 	}
-	
 	
 }

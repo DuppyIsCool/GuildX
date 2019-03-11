@@ -1,0 +1,23 @@
+#Messages for guilds plugin
+msg:
+    guild:
+        deleted: "&aGuild deleted"
+        created: "&aGuild created"
+        error:
+            notinguild: "&cNot in a guild"
+            nametoolong: "&cName too long"
+            ranktoolow: "&cRank too low"
+            alreadyinguild: "&cAlready in guild"
+            doesnotexist: "&c%rguild% does not exist"
+ 
+#Error messages (general errors
+error:
+    nopermission: "&cNo perm"
+    playeronly: "&cPlayer only"
+    invalidargs: "&cInvalid arguments"
+
+#Guild default values
+default:
+    guild:
+        lives: 10
+        namelength: 14

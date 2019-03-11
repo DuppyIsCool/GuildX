@@ -3,7 +3,6 @@ package me.Dupps.GuildX.Managers;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import me.Dupps.GuildX.Guilds.Guild;
 
 public class GuildManager {
@@ -13,6 +12,7 @@ public class GuildManager {
 	public void setupGuilds() {
 		for(String guild : cfgm.getGuilds().getKeys(false)) {
 			Guild g = new Guild();
+			g.setGuildname(guild);
 			g.setLeader(cfgm.getGuilds().getString(guild + ".leader"));
 			g.setMembers(cfgm.getGuilds().getStringList(guild + ".members"));
 			g.setAdmins(cfgm.getGuilds().getStringList(guild + ".admins"));

@@ -5,24 +5,44 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 import me.Dupps.GuildX.Commands.user.*;
+import me.Dupps.GuildX.Managers.MessageManager;
 
 public class CMDExecutor implements CommandExecutor{
-
+	private MessageManager msg = new MessageManager();
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if(cmd.getName().equalsIgnoreCase("guild")) {
-			if(args.length == 0)
-				return false;
 			
-			if(args.length == 2 && args[0].equalsIgnoreCase("create")) {
-				GuildXCreateGuild command = new GuildXCreateGuild();
-				command.Execute(sender,args);
+			if(args.length == 0) {
+				msg.print("error.invalidargs", sender, null, null, null);				
 				return true;
 			}
 			
-			if(args.length == 1 && args[0].equalsIgnoreCase("delete")) {
+			if(args[0].equalsIgnoreCase("create")) {
+				GuildXCreateGuild command = new GuildXCreateGuild();
+				
+				if(args.length == 2) {
+					command.Execute(sender,args);
+					return true;
+				}
+				else {
+					msg.print("error.invalidargs", sender, null, null, null);
+					return true;
+				}
+			}
+			
+			if(args[0].equalsIgnoreCase("delete")) {
 				GuildXDeleteGuild command = new GuildXDeleteGuild();
-				command.Execute(sender,args);
+				GuildXDeleteOtherGuild command1 = new GuildXDeleteOtherGuild();
+				if(args.length == 1) {
+					command.Execute(sender,args);
+					return true;
+				}
+				if(args.length == 2) {
+					command1.Execute(sender, args);
+					return true;
+				}
+				msg.print("error.invalidargs", sender, null, null, null);
 				return true;
 			}
 			

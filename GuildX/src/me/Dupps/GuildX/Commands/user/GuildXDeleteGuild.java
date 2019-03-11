@@ -4,25 +4,33 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import me.Dupps.GuildX.Commands.CMD;
+import me.Dupps.GuildX.Guilds.Guild;
 import me.Dupps.GuildX.Guilds.GuildMethods;
 import me.Dupps.GuildX.Managers.GuildManager;
+import me.Dupps.GuildX.Managers.MessageManager;
 
 public class GuildXDeleteGuild implements CMD {
 	
 	private GuildMethods gm = new GuildMethods();
-
+	private MessageManager msg = new MessageManager();
 	@Override
 	public void Execute(CommandSender sender, String[] args) {
 		if((sender instanceof Player)) {
 			Player p = (Player) sender;
-			String puuid = p.getUniqueId().toString();
 			
-			if(gm.isInGuild(puuid)) {
-				if(gm.isLeader(puuid)) {
-					GuildManager.removeGuild(gm.getGuildwPlayer(puuid));
-				}
-			}
-		}
+			if(canExecute(sender)) {
+				String puuid = p.getUniqueId().toString();
+				
+				if(gm.isInGuild(puuid)) {
+					if(gm.isLeader(puuid)) {
+						msg.print("msg.guild.deleted", p, gm.getGuildwPlayer(puuid).toString(), null, null);
+						GuildManager.removeGuild(gm.getGuildwPlayer(puuid));
+						for(Guild g : GuildManager.getGuilds())
+							System.out.println(g.toString());
+					}else msg.print("msg.guild.error.ranktoolow", sender, gm.getGuildwPlayer(puuid).toString(), null, null);
+				}else msg.print("msg.guild.error.notinguild", sender, null, null, null);
+			}else msg.print("error.nopermission", sender, null, null, null);
+		}else msg.printToConsole("error.playeronly", null, null, null, null);
 	}
 
 	@Override
