@@ -3,12 +3,18 @@ msg:
     guild:
         deleted: "&aGuild deleted"
         created: "&aGuild created"
+        sentinvite: "&aInvite sent"
+        joined: "&aYou have joined %pguild%"
         error:
             notinguild: "&cNot in a guild"
+            nametaken: "&cThat name is taken"
             nametoolong: "&cName too long"
             ranktoolow: "&cRank too low"
             alreadyinguild: "&cAlready in guild"
             doesnotexist: "&c%rguild% does not exist"
+            playerhasinvite: "&cThat player already has an invite"
+            inviteself: "&cYou cannot invite yourself"
+            noinvite: "&cYou do not have an invite"
  
 #Error messages (general errors
 error:
@@ -21,3 +27,5 @@ default:
     guild:
         lives: 10
         namelength: 14
+    invites:
+        duration: 120

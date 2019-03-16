@@ -1,6 +1,14 @@
 package me.Dupps.GuildX.Guilds;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+
 import me.Dupps.GuildX.Managers.GuildManager;
+import me.Dupps.GuildX.Managers.InviteManager;
+import net.md_5.bungee.api.ChatColor;
 
 public class GuildMethods {
 
@@ -90,4 +98,38 @@ public class GuildMethods {
 		return false;
 	}
 	
+	public boolean hasInvite(String player, String guild) {
+		for(Invites i : InviteManager.getInvites()) {
+			if(i.getPlayer().equalsIgnoreCase(player) && i.getGuild().equalsIgnoreCase(guild)) {
+				return true;
+			}
+			
+		}
+		return false;
+	}
+
+	public void sendInviteMessage(String displayName, String guild) {
+		for(Player p : Bukkit.getServer().getOnlinePlayers()) {
+			if(p.getName().equalsIgnoreCase(displayName)) {
+				p.sendMessage(ChatColor.GREEN + "You have been invited to join the guild "+ChatColor.YELLOW + guild);
+			}
+		}
+	}
+	
+	public void addPlayerToGuild(String puuid, String guild) {
+		for(Guild g : GuildManager.getGuilds()) {
+			if(g.toString().equalsIgnoreCase(guild)) {
+				List<String> members = g.getMembers();
+				try {
+					members.add(puuid);
+					g.setMembers(members);
+				}
+				catch(NullPointerException e) {
+					List<String> memb = new ArrayList<String>();
+					memb.add(puuid);
+					g.setMembers(memb);
+				}
+			}
+		}
+	}
 }

@@ -31,6 +31,32 @@ public class CMDExecutor implements CommandExecutor{
 				}
 			}
 			
+			if(args[0].equalsIgnoreCase("invite")) {
+				GuildXInvitePlayer command = new GuildXInvitePlayer();
+				
+				if(args.length == 2) {
+					command.Execute(sender,args);
+					return true;
+				}
+				else {
+					msg.print("error.invalidargs", sender, null, null, null);
+					return true;
+				}
+			}
+			
+			if(args[0].equalsIgnoreCase("join")) {
+				GuildXJoinGuild command = new GuildXJoinGuild();
+				
+				if(args.length == 2) {
+					command.Execute(sender,args);
+					return true;
+				}
+				else {
+					msg.print("error.invalidargs", sender, null, null, null);
+					return true;
+				}
+			}
+			
 			if(args[0].equalsIgnoreCase("delete")) {
 				GuildXDeleteGuild command = new GuildXDeleteGuild();
 				GuildXDeleteOtherGuild command1 = new GuildXDeleteOtherGuild();

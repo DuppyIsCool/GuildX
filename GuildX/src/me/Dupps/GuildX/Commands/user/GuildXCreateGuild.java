@@ -1,5 +1,6 @@
 package me.Dupps.GuildX.Commands.user;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.command.CommandSender;
@@ -22,21 +23,22 @@ public class GuildXCreateGuild implements CMD {
 				Player p = (Player) sender;
 				if(!gm.isInGuild(p.getUniqueId().toString())) {
 					if(args[1].length() <= Plugin.plugin.getConfig().getInt("default.guild.namelength")) {
+						if(!gm.guildExists(args[1])) {
 						
-						//Variable declaration
-						String puuid = p.getUniqueId().toString();
-						Guild guild = new Guild();
-						List<String> members = null;
-						List<String> admins = null;
-						//Putting variables into guild object and adding guild to GuildManager's list
-						guild.setGuildname(args[1]);
-						guild.setLeader(puuid);
-						guild.setLives(Plugin.plugin.getConfig().getInt("default.guild.lives"));
-						guild.setAdmins(admins);
-						guild.setMembers(members);
-						GuildManager.addGuild(guild);
-						msg.print("msg.guild.created", p, guild.toString(), null, null);
-						
+							//Variable declaration
+							String puuid = p.getUniqueId().toString();
+							Guild guild = new Guild();
+							List<String> members = new ArrayList<String>();
+							List<String> admins = new ArrayList<String>();
+							//Putting variables into guild object and adding guild to GuildManager's list
+							guild.setGuildname(args[1]);
+							guild.setLeader(puuid);
+							guild.setLives(Plugin.plugin.getConfig().getInt("default.guild.lives"));
+							guild.setAdmins(admins);
+							guild.setMembers(members);
+							GuildManager.addGuild(guild);
+							msg.print("msg.guild.created", p, guild.toString(), null, null);
+						}else msg.print("msg.guild.error.nametaken", sender, null, null, args[1]);
 					}else msg.print("msg.guild.error.nametoolong", sender, null, null, null);
 				}else msg.print("msg.guild.error.alreadyinguild", sender, gm.getGuildwPlayer(p.getUniqueId().toString()).toString(), null, null);
 			}else msg.print("msg.guild.error.nopermission", sender, null, null, null);

@@ -10,6 +10,7 @@ public class GuildManager {
 	private ConfigManager cfgm = new ConfigManager();
 	
 	public void setupGuilds() {
+		//Cycles through config file and sets up the object ArrayList of guilds
 		for(String guild : cfgm.getGuilds().getKeys(false)) {
 			Guild g = new Guild();
 			g.setGuildname(guild);
@@ -22,6 +23,11 @@ public class GuildManager {
 	}
 	
 	public void saveGuilds() {
+		//Clears the old config file
+		for(String key : cfgm.getGuilds().getKeys(false))
+			cfgm.getGuilds().set(key, null);
+		
+		//Saves guilds from object array to config
 		for(Guild g : guilds) {
 			cfgm.getGuilds().set(g.toString() + ".leader",g.getLeader());
 			cfgm.getGuilds().set(g.toString() + ".members",g.getMembers());

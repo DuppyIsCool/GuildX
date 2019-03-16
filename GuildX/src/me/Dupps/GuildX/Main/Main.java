@@ -13,7 +13,6 @@ public class Main extends JavaPlugin{
 	private static ConsoleCommandSender console;
 	private ConfigManager cfgm;
 	private GuildManager guildmanager = new GuildManager();
-	
 	public void onEnable() {
 		Plugin.plugin = this;
 		console = Bukkit.getServer().getConsoleSender();
