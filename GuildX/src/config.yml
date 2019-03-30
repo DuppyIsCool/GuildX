@@ -1,14 +1,16 @@
 #Messages for guilds plugin
 msg:
     guild:
-        deleted: "&aYou have deleted &d%pstring%"
-        created: "&aYou have created &d%pstring%"
-        sentinvite: "&aInvite sent to &d%rstring%"
-        joined: "&aYou have joined &d%pstring%"
-        receivedinvite: "&aYou have received an invite from &d%rstring%"
+        deleted: "&aYou have deleted &e%pstring%"
+        created: "&aYou have created &e%pstring%"
+        sentinvite: "&aInvite sent to &e%rstring%"
+        joined: "&aYou have joined &e%pstring%"
+        receivedinvite: "&aYou have received an invite from &e%rstring%"
         leftguild: "&aYou have left &e%pstring%"
         kickedplayer: "&aYou have kicked &e%rstring%"
-        reloaded: "&eGuilds has been reloaded"
+        reloaded: "&bGuilds has been reloaded"
+        promote: "&aYou have promoted &e%pstring% &ato &e%rstring%"
+        demote: "&aYou have demoted &e%pstring% &ato %e%rstring%"
         error:
             notinguild: "&cNot in a guild"
             nothighrank: "&cYou are not high enough rank to do this"
@@ -17,20 +19,23 @@ msg:
             nametoolong: "&cName too long"
             ranktoolow: "&cRank too low"
             alreadyinguild: "&cAlready in guild"
-            doesnotexist: "&d%rstring% &cdoes not exist"
-            playerhasinvite: "&d%rstring% &calready has an invite"
-            playeralreadyinguild: "&d%receiver% &cis already in a guild"
+            doesnotexist: "&e%rstring% &cdoes not exist"
+            playerhasinvite: "&e%rstring% &calready has an invite"
+            playeralreadyinguild: "&e%receiver% &cis already in a guild"
             inviteself: "&cYou cannot invite yourself"
             noinvite: "&cYou do not have an invite"
             leaveasleader: "&cYou cannot leave as the leader"
             kickself: "&cYou cannot kick yourself"
+            promoteself: "&cYou cannot promote yourself"
+            demoteself: "&cYou cannot demote yourself"
+            lowdemote: "&cYou cannot demote %pstring% any further"
  
 #Error messages (general errors
 error:
     nopermission: "&cNo perm"
     playeronly: "&cPlayer only"
     invalidargs: "&cInvalid arguments"
-    playernotonline: "&d%rstring%&c is not online"
+    playernotonline: "&e%rstring%&c is not online"
     nocommand: "&cInvalid guild command"
     noplayer: "&c%rstring% is not a real player"
 

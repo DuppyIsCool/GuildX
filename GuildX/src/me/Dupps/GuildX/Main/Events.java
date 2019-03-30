@@ -23,7 +23,6 @@ public class Events implements Listener{
 	@EventHandler
 	public void blockPlaced(BlockPlaceEvent event) {
 		Block b = event.getBlock();
-		System.out.println("new metadata");
 		b.setMetadata("PLACED", new FixedMetadataValue(Plugin.plugin, "something"));
 	}
 	

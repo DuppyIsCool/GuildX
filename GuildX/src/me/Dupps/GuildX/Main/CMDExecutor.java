@@ -18,6 +18,8 @@ public class CMDExecutor implements CommandExecutor{
 	private GuildXLeaveGuild leave = new GuildXLeaveGuild();
 	private GuildXKickPlayer kick = new GuildXKickPlayer();
 	private GuildXReload reload = new GuildXReload();
+	private GuildXDemotePlayer demote = new GuildXDemotePlayer();
+	private GuildXPromotePlayer promote = new GuildXPromotePlayer();
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if(cmd.getName().equalsIgnoreCase("guild")) {
@@ -67,6 +69,30 @@ public class CMDExecutor implements CommandExecutor{
 				
 				if(args.length == 2) {
 					kick.Execute(sender,args);
+					return true;
+				}
+				else {
+					msg.print("error.invalidargs", sender, null, null, null);
+					return true;
+				}
+			}
+			
+			if(args[0].equalsIgnoreCase("promote")) {
+							
+				if(args.length == 2) {
+					promote.Execute(sender,args);
+					return true;
+				}
+				else {
+					msg.print("error.invalidargs", sender, null, null, null);
+					return true;
+				}
+			}
+			
+			if(args[0].equalsIgnoreCase("demote")) {
+				
+				if(args.length == 2) {
+					demote.Execute(sender,args);
 					return true;
 				}
 				else {
