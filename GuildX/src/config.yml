@@ -7,8 +7,12 @@ msg:
         joined: "&aYou have joined &d%pstring%"
         receivedinvite: "&aYou have received an invite from &d%rstring%"
         leftguild: "&aYou have left &e%pstring%"
+        kickedplayer: "&aYou have kicked &e%rstring%"
+        reloaded: "&eGuilds has been reloaded"
         error:
             notinguild: "&cNot in a guild"
+            nothighrank: "&cYou are not high enough rank to do this"
+            vnotinguild: "&c%rstring% is not in a guild"
             nametaken: "&cThat name is taken"
             nametoolong: "&cName too long"
             ranktoolow: "&cRank too low"
@@ -19,6 +23,7 @@ msg:
             inviteself: "&cYou cannot invite yourself"
             noinvite: "&cYou do not have an invite"
             leaveasleader: "&cYou cannot leave as the leader"
+            kickself: "&cYou cannot kick yourself"
  
 #Error messages (general errors
 error:
@@ -27,6 +32,7 @@ error:
     invalidargs: "&cInvalid arguments"
     playernotonline: "&d%rstring%&c is not online"
     nocommand: "&cInvalid guild command"
+    noplayer: "&c%rstring% is not a real player"
 
 #Guild default values
 default:

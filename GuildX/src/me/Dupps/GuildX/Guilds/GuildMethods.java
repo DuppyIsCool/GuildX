@@ -5,12 +5,13 @@ import java.util.ArrayList;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import me.Dupps.GuildX.Managers.ConfigManager;
 import me.Dupps.GuildX.Managers.GuildManager;
 import me.Dupps.GuildX.Managers.InviteManager;
 import net.md_5.bungee.api.ChatColor;
 
 public class GuildMethods {
-
+	ConfigManager cfgm = new ConfigManager();
 	public boolean isInGuild(String puuid) {
 		
 		for(Guild g : GuildManager.getGuilds()) {
@@ -106,6 +107,16 @@ public class GuildMethods {
 		}
 		return false;
 	}
+	
+	public String getUUID(String name) {
+		for(String key: cfgm.getPlayers().getKeys(false)) {
+			if(key.equalsIgnoreCase(name)) {
+				return cfgm.getPlayers().getString(key + ".uuid");
+			}
+		}
+		return null;
+	}
+	
 
 	public void sendInviteMessage(String displayName, String guild) {
 		for(Player p : Bukkit.getServer().getOnlinePlayers()) {

@@ -25,7 +25,7 @@ public class GuildXInvitePlayer implements CMD {
 				String guild = gm.getGuildwPlayer(puuid).toString();
 				if(gm.isAdmin(puuid) || gm.isLeader(puuid)) {
 					if(!gm.hasInvite(args[1], guild)) {
-						if(!args[1].equalsIgnoreCase(p.getDisplayName())) {
+						if(!args[1].equalsIgnoreCase(p.getName())) {
 							if(gm.isPlayerOnline(args[1])) {
 								if(!gm.isInGuild(gm.getPlayerWName(args[1]).getUniqueId().toString())) {
 									Invites i = new Invites(args[1], guild, Plugin.plugin.getConfig().getInt("default.invites.duration"));
