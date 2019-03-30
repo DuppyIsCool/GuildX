@@ -1,7 +1,6 @@
 package me.Dupps.GuildX.Guilds;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -116,20 +115,56 @@ public class GuildMethods {
 		}
 	}
 	
+	public boolean isPlayerOnline(String player) {
+		for(Player p : Bukkit.getServer().getOnlinePlayers()) {
+			if(p.getName().equalsIgnoreCase(player))
+				return true;
+		}
+		return false;
+	}
+	
 	public void addPlayerToGuild(String puuid, String guild) {
 		for(Guild g : GuildManager.getGuilds()) {
 			if(g.toString().equalsIgnoreCase(guild)) {
-				List<String> members = g.getMembers();
+				ArrayList<String> members = g.getMembers();
 				try {
 					members.add(puuid);
 					g.setMembers(members);
 				}
 				catch(NullPointerException e) {
-					List<String> memb = new ArrayList<String>();
+					ArrayList<String> memb = new ArrayList<String>();
 					memb.add(puuid);
 					g.setMembers(memb);
 				}
 			}
 		}
+	}
+	
+	public String getRank(String puuid) {
+		for(Guild g : GuildManager.getGuilds()) {
+			if(g.getMembers().contains(puuid))
+				return "member";
+			if(g.getAdmins().contains(puuid))
+				return "admin";
+			if(g.getLeader().equals(puuid))
+				return "leader";
+		}
+		return null;
+	}
+	
+	public Player getPlayerWName(String player) {
+		for(Player p : Bukkit.getServer().getOnlinePlayers()) {
+			if(p.getName().equalsIgnoreCase(player))
+				return p;
+		}
+		return null;
+	}
+	
+	public Player getPlayerWUUID(String uuid) {
+		for(Player p : Bukkit.getServer().getOnlinePlayers()) {
+			if(p.getName().equalsIgnoreCase(uuid))
+				return p;
+		}
+		return null;
 	}
 }

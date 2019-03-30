@@ -11,31 +11,30 @@ import me.Dupps.GuildX.Main.Plugin;
 public class MessageManager {
 	private GuildMethods gm = new GuildMethods();
 	
-	public void print(String path, CommandSender sender, String pguild, Player r, String rguild) {
+	public void print(String path, CommandSender sender, String pstring, Player r, String rstring) {
 		if(sender instanceof Player) {
 			Player p = (Player) sender;
 			String message = "";
 			try{message = Plugin.plugin.getConfig().getString(path);}
 			catch(NullPointerException e) {Main.getConsole().sendMessage(ChatColor.RED + "Error getting path "+path);}
 			
-			try{message.replaceAll("%player%", p.getDisplayName());}
+			try{message = message.replaceAll("%player%", p.getDisplayName());}
 			catch(NullPointerException e) {}
-			try{message.replaceAll("%pguild%", gm.getGuildwPlayer(p.getUniqueId().toString()).toString());}
+			try{message = message.replaceAll("%pstring%", pstring);}
 			catch(NullPointerException e) {}
-			try{message.replaceAll("%receiver%", r.getDisplayName());}
+			try{message = message.replaceAll("%receiver%", r.getDisplayName());}
 			catch(NullPointerException e) {}
-			try{message.replaceAll("%rguild%", gm.getGuildwPlayer(r.getUniqueId().toString()).toString());}
+			try{message = message.replaceAll("%rstring%", rstring);}
 			catch(NullPointerException e) {}
-			
 			p.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
 		}
 		else {
 			String message = "";
 			try{message = Plugin.plugin.getConfig().getString(path);}
-			catch(NullPointerException e) {Main.getConsole().sendMessage(ChatColor.RED + "Error getting path "+path);}
-			try{message.replaceAll("%receiver%", r.getDisplayName());}
 			catch(NullPointerException e) {}
-			try{message.replaceAll("%rguild%", gm.getGuildwPlayer(r.getUniqueId().toString()).toString());}
+			try{message = message.replaceAll("%receiver%", r.getDisplayName());}
+			catch(NullPointerException e) {}
+			try{message = message.replaceAll("%rstring%",rstring);}
 			catch(NullPointerException e) {}
 			sender.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
 		}
@@ -47,13 +46,13 @@ public class MessageManager {
 		try{message = Plugin.plugin.getConfig().getString(path);}
 		catch(NullPointerException e) {Main.getConsole().sendMessage(ChatColor.RED + "Error getting path "+path);}
 		
-		try{message.replaceAll("%player%", p.getDisplayName());}
+		try{message = message.replaceAll("%player%", p.getDisplayName());}
 		catch(NullPointerException e) {}
-		try{message.replaceAll("%pguild%", gm.getGuildwPlayer(p.getUniqueId().toString()).toString());}
+		try{message = message.replaceAll("%pguild%", gm.getGuildwPlayer(p.getUniqueId().toString()).toString());}
 		catch(NullPointerException e) {}
-		try{message.replaceAll("%receiver%", r.getDisplayName());}
+		try{message = message.replaceAll("%receiver%", r.getDisplayName());}
 		catch(NullPointerException e) {}
-		try{message.replaceAll("%rguild%", gm.getGuildwPlayer(r.getUniqueId().toString()).toString());}
+		try{message = message.replaceAll("%rguild%", gm.getGuildwPlayer(r.getUniqueId().toString()).toString());}
 		catch(NullPointerException e) {}
 		
 		message = ChatColor.translateAlternateColorCodes('&', message);

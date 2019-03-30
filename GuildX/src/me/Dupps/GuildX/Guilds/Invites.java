@@ -1,19 +1,19 @@
 package me.Dupps.GuildX.Guilds;
 
 public class Invites {
-	private String player,guild;
+	private String guild,uuid;
 	private int time;
 	
 	public Invites(String player, String guild, int time) {
-		this.player = player;
+		this.uuid = player;
 		this.guild = guild;
 		this.time = time;
 	}
 	public String getPlayer() {
-		return player;
+		return uuid;
 	}
 	public void setPlayer(String player) {
-		this.player = player;
+		this.uuid = player;
 	}
 	public String getGuild() {
 		return guild;

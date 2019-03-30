@@ -9,6 +9,12 @@ import me.Dupps.GuildX.Managers.MessageManager;
 
 public class CMDExecutor implements CommandExecutor{
 	private MessageManager msg = new MessageManager();
+	private GuildXCreateGuild create = new GuildXCreateGuild();
+	private GuildXInvitePlayer invite = new GuildXInvitePlayer();
+	private GuildXJoinGuild join = new GuildXJoinGuild();
+	private GuildXDeleteGuild delete = new GuildXDeleteGuild();
+	private GuildXDeleteOtherGuild deleteother = new GuildXDeleteOtherGuild();
+	private GuildXLeaveGuild leave = new GuildXLeaveGuild();
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if(cmd.getName().equalsIgnoreCase("guild")) {
@@ -19,10 +25,9 @@ public class CMDExecutor implements CommandExecutor{
 			}
 			
 			if(args[0].equalsIgnoreCase("create")) {
-				GuildXCreateGuild command = new GuildXCreateGuild();
 				
 				if(args.length == 2) {
-					command.Execute(sender,args);
+					create.Execute(sender,args);
 					return true;
 				}
 				else {
@@ -32,10 +37,9 @@ public class CMDExecutor implements CommandExecutor{
 			}
 			
 			if(args[0].equalsIgnoreCase("invite")) {
-				GuildXInvitePlayer command = new GuildXInvitePlayer();
 				
 				if(args.length == 2) {
-					command.Execute(sender,args);
+					invite.Execute(sender,args);
 					return true;
 				}
 				else {
@@ -45,10 +49,21 @@ public class CMDExecutor implements CommandExecutor{
 			}
 			
 			if(args[0].equalsIgnoreCase("join")) {
-				GuildXJoinGuild command = new GuildXJoinGuild();
 				
 				if(args.length == 2) {
-					command.Execute(sender,args);
+					join.Execute(sender,args);
+					return true;
+				}
+				else {
+					msg.print("error.invalidargs", sender, null, null, null);
+					return true;
+				}
+			}
+			
+			if(args[0].equalsIgnoreCase("leave")) {
+				
+				if(args.length == 1) {
+					leave.Execute(sender, args);
 					return true;
 				}
 				else {
@@ -58,19 +73,20 @@ public class CMDExecutor implements CommandExecutor{
 			}
 			
 			if(args[0].equalsIgnoreCase("delete")) {
-				GuildXDeleteGuild command = new GuildXDeleteGuild();
-				GuildXDeleteOtherGuild command1 = new GuildXDeleteOtherGuild();
 				if(args.length == 1) {
-					command.Execute(sender,args);
+					delete.Execute(sender,args);
 					return true;
 				}
 				if(args.length == 2) {
-					command1.Execute(sender, args);
+					deleteother.Execute(sender, args);
 					return true;
 				}
 				msg.print("error.invalidargs", sender, null, null, null);
 				return true;
 			}
+			
+			//End of line
+			msg.print("error.nocommand", sender, null, null, null);
 			
 			return true;
 		}

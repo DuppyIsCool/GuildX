@@ -16,10 +16,14 @@ public class InviteManager {
 	}
 	
 	public static void deleteInvite(String player, String guild) {
-		for(Invites i : invites) {
-			if(i.getPlayer().equalsIgnoreCase(player) && i.getGuild().equalsIgnoreCase(guild)) {
-				invites.remove(i);
+		Invites i = null;
+		for(Invites b : invites) {
+			if(b.getPlayer().equalsIgnoreCase(player) && b.getGuild().equalsIgnoreCase(guild)) {
+				i = b;
 			}
 		}
+		try {
+		invites.remove(i);}
+		catch(NullPointerException e) {}
 	}
 }

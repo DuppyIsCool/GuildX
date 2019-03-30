@@ -1,26 +1,32 @@
 #Messages for guilds plugin
 msg:
     guild:
-        deleted: "&aGuild deleted"
-        created: "&aGuild created"
-        sentinvite: "&aInvite sent"
-        joined: "&aYou have joined %pguild%"
+        deleted: "&aYou have deleted &d%pstring%"
+        created: "&aYou have created &d%pstring%"
+        sentinvite: "&aInvite sent to &d%rstring%"
+        joined: "&aYou have joined &d%pstring%"
+        receivedinvite: "&aYou have received an invite from &d%rstring%"
+        leftguild: "&aYou have left &e%pstring%"
         error:
             notinguild: "&cNot in a guild"
             nametaken: "&cThat name is taken"
             nametoolong: "&cName too long"
             ranktoolow: "&cRank too low"
             alreadyinguild: "&cAlready in guild"
-            doesnotexist: "&c%rguild% does not exist"
-            playerhasinvite: "&cThat player already has an invite"
+            doesnotexist: "&d%rstring% &cdoes not exist"
+            playerhasinvite: "&d%rstring% &calready has an invite"
+            playeralreadyinguild: "&d%receiver% &cis already in a guild"
             inviteself: "&cYou cannot invite yourself"
             noinvite: "&cYou do not have an invite"
+            leaveasleader: "&cYou cannot leave as the leader"
  
 #Error messages (general errors
 error:
     nopermission: "&cNo perm"
     playeronly: "&cPlayer only"
     invalidargs: "&cInvalid arguments"
+    playernotonline: "&d%rstring%&c is not online"
+    nocommand: "&cInvalid guild command"
 
 #Guild default values
 default:

@@ -6,7 +6,7 @@ import java.util.List;
 import me.Dupps.GuildX.Guilds.Guild;
 
 public class GuildManager {
-	private static List<Guild> guilds = new ArrayList<Guild>();
+	private static ArrayList<Guild> guilds = new ArrayList<Guild>();
 	private ConfigManager cfgm = new ConfigManager();
 	
 	public void setupGuilds() {
@@ -15,8 +15,8 @@ public class GuildManager {
 			Guild g = new Guild();
 			g.setGuildname(guild);
 			g.setLeader(cfgm.getGuilds().getString(guild + ".leader"));
-			g.setMembers(cfgm.getGuilds().getStringList(guild + ".members"));
-			g.setAdmins(cfgm.getGuilds().getStringList(guild + ".admins"));
+			g.setMembers((ArrayList<String>) cfgm.getGuilds().getStringList(guild + ".members"));
+			g.setAdmins((ArrayList<String>) cfgm.getGuilds().getStringList(guild + ".admins"));
 			g.setLives(cfgm.getGuilds().getInt(guild + ".lives"));
 			addGuild(g);
 		}

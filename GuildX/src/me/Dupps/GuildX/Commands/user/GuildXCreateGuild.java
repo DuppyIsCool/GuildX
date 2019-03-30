@@ -1,7 +1,6 @@
 package me.Dupps.GuildX.Commands.user;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -28,8 +27,8 @@ public class GuildXCreateGuild implements CMD {
 							//Variable declaration
 							String puuid = p.getUniqueId().toString();
 							Guild guild = new Guild();
-							List<String> members = new ArrayList<String>();
-							List<String> admins = new ArrayList<String>();
+							ArrayList<String> members = new ArrayList<String>();
+							ArrayList<String> admins = new ArrayList<String>();
 							//Putting variables into guild object and adding guild to GuildManager's list
 							guild.setGuildname(args[1]);
 							guild.setLeader(puuid);

@@ -1,11 +1,11 @@
 package me.Dupps.GuildX.Guilds;
 
-import java.util.List;
+import java.util.ArrayList;
 
 
 public class Guild {
 	private String guildname,leader;
-	private List<String> members,admins;
+	private ArrayList<String> members,admins;
 	private int lives;
 	
 	public String getGuildname() {
@@ -14,16 +14,16 @@ public class Guild {
 	public void setGuildname(String guildname) {
 		this.guildname = guildname;
 	}
-	public List<String> getMembers() {
+	public ArrayList<String> getMembers() {
 		return members;
 	}
-	public void setMembers(List<String> members) {
+	public void setMembers(ArrayList<String> members) {
 		this.members = members;
 	}
-	public List<String> getAdmins() {
+	public ArrayList<String> getAdmins() {
 		return admins;
 	}
-	public void setAdmins(List<String> admins) {
+	public void setAdmins(ArrayList<String> admins) {
 		this.admins = admins;
 	}
 	public int getLives() {

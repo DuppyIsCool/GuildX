@@ -20,21 +20,23 @@ public class GuildXInvitePlayer implements CMD {
 			Player p = (Player) sender;
 			String puuid = p.getUniqueId().toString();
 			
+			//Lmao I can't even read this!
 			if(gm.isInGuild(puuid)) {
 				String guild = gm.getGuildwPlayer(puuid).toString();
 				if(gm.isAdmin(puuid) || gm.isLeader(puuid)) {
 					if(!gm.hasInvite(args[1], guild)) {
 						if(!args[1].equalsIgnoreCase(p.getDisplayName())) {
-							Invites i = new Invites(args[1], guild, Plugin.plugin.getConfig().getInt("default.invites.duration"));
-							System.out.println("Creating Invite:\nFor: "+args[1]+
-									"\nFor guild: "+guild
-									+"\nWith duration of:"+Plugin.plugin.getConfig().getInt("default.invites.duration"));
-							InviteManager.addInvite(i);
-							msg.print("msg.guild.sentinvite", sender, guild, null, null);
-							gm.sendInviteMessage(args[1],guild);
-							System.out.println(InviteManager.getInvites());
+							if(gm.isPlayerOnline(args[1])) {
+								if(!gm.isInGuild(gm.getPlayerWName(args[1]).getUniqueId().toString())) {
+									Invites i = new Invites(args[1], guild, Plugin.plugin.getConfig().getInt("default.invites.duration"));
+									InviteManager.addInvite(i);
+									msg.print("msg.guild.sentinvite", sender, guild, null, args[1]);
+									CommandSender s = (CommandSender) gm.getPlayerWName(args[1]);
+									msg.print("msg.guild.receivedinvite", s , null, p, guild);
+								}else msg.print("msg.guild.error.playeralreadyinguild", sender, null, gm.getPlayerWName(args[1]), null);
+							}else { msg.print("error.playernotonline",sender,null,null,args[1]);}
 						}else msg.print("msg.guild.error.inviteself", sender, guild, null, null);
-					}else msg.print("msg.guild.error.playerhasinvite", sender,guild, null, null);
+					}else msg.print("msg.guild.error.playerhasinvite", sender,guild, null, args[1]);
 				}else msg.print("msg.guild.error.ranktoolow", sender,guild, null, null);
 			}else msg.print("msg.guild.error.notinguild", sender, null, null, null);
 		}else msg.print("error.nopermission", sender, null, null, null);
