@@ -1,5 +1,6 @@
 package me.Dupps.GuildX.Main;
 
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -8,6 +9,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 
+import me.Dupps.GuildX.Managers.ChunkBorderManager;
 import me.Dupps.GuildX.Managers.ConfigManager;
 
 public class Events implements Listener{
@@ -15,8 +17,11 @@ public class Events implements Listener{
 	@EventHandler
 	public void onBlockBreak(BlockBreakEvent e) {
 		Block b = e.getBlock();
-		if (b.getMetadata("PLACED").toString().length() > 7) {
-			e.getPlayer().sendMessage("EYO YOU PLACED THAT");
+		if (!b.getMetadata("SPAWNED").isEmpty()) {
+			e.setCancelled(true);
+			b.setType((Material) b.getMetadata("SPAWNED").get(0).value());
+			b.removeMetadata("SPAWNED", Plugin.plugin);
+			ChunkBorderManager.removeBlock(b);
 		}
 	}
 	

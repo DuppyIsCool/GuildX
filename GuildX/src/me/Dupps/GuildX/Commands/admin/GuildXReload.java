@@ -20,14 +20,12 @@ public class GuildXReload implements CMD{
 
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Reloads the plugin";
 	}
 
 	@Override
 	public String getUsage() {
-		// TODO Auto-generated method stub
-		return null;
+		return "/guild reload";
 	}
 
 	@Override

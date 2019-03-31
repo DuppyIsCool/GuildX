@@ -11,9 +11,12 @@ msg:
         reloaded: "&bGuilds has been reloaded"
         promote: "&aYou have promoted &e%pstring% &ato &e%rstring%"
         demote: "&aYou have demoted &e%pstring% &ato %e%rstring%"
+        claimed: "&aYou have claimed this chunk"
+        unclaimed: "&aYou have unclaimed this chunk"
         error:
             notinguild: "&cNot in a guild"
-            nothighrank: "&cYou are not high enough rank to do this"
+            chunknotclaimed: "&cNobody owns this chunk!"
+            chunktaken: "&cThis chunk is already claimed"
             vnotinguild: "&c%rstring% is not in a guild"
             nametaken: "&cThat name is taken"
             nametoolong: "&cName too long"

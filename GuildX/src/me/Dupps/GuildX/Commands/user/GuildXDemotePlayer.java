@@ -33,7 +33,7 @@ public class GuildXDemotePlayer implements CMD {
 							if(higherRank(puuid,vuuid)) {
 								String rank = gm.getRank(vuuid);
 								
-								if(rank.equalsIgnoreCase("admin")) { //Promotes victim to leader from admin
+								if(rank.equalsIgnoreCase("admin")) { //Demotes victim to leader from admin
 									ArrayList<String> admins = new ArrayList<String>();
 									ArrayList<String> members = new ArrayList<String>();
 									admins = g.getAdmins();
@@ -47,12 +47,12 @@ public class GuildXDemotePlayer implements CMD {
 									msg.print("msg.guild.demote", sender, args[1], null, "Member");
 								}
 								
-								else if(rank.equalsIgnoreCase("member")) {//Promotes victim to Admin from member
+								else if(rank.equalsIgnoreCase("member")) {//Throws message error trying to demote a member
 									msg.print("msg.guild.error.lowdemote", sender, args[1], null, null);
 								}
 								
 								
-							}else msg.print("msg.guild.error.nothighrank", sender, null, null, null);
+							}else msg.print("msg.guild.error.ranktoolow", sender, null, null, null);
 						}else msg.print("msg.guild.error.vnotinguild", sender, null, null, args[1]);
 					}else msg.print("msg.guild.error.notinguild", sender, null, null, null);
 				}else msg.print("msg.guild.error.demoteself", sender, null, null, null);

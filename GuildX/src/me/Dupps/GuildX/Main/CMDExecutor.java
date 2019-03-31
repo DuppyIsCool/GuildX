@@ -20,6 +20,8 @@ public class CMDExecutor implements CommandExecutor{
 	private GuildXReload reload = new GuildXReload();
 	private GuildXDemotePlayer demote = new GuildXDemotePlayer();
 	private GuildXPromotePlayer promote = new GuildXPromotePlayer();
+	private GuildXClaim claim = new GuildXClaim();
+	private GuildXUnclaim unclaim = new GuildXUnclaim();
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if(cmd.getName().equalsIgnoreCase("guild")) {
@@ -117,6 +119,28 @@ public class CMDExecutor implements CommandExecutor{
 				
 				if(args.length == 1) {
 					reload.Execute(sender, args);
+					return true;
+				}
+				else {
+					msg.print("error.invalidargs", sender, null, null, null);
+					return true;
+				}
+			}
+			if(args[0].equalsIgnoreCase("claim")) {
+				
+				if(args.length == 1) {
+					claim.Execute(sender, args);
+					return true;
+				}
+				else {
+					msg.print("error.invalidargs", sender, null, null, null);
+					return true;
+				}
+			}
+			if(args[0].equalsIgnoreCase("unclaim")) {
+				
+				if(args.length == 1) {
+					unclaim.Execute(sender, args);
 					return true;
 				}
 				else {

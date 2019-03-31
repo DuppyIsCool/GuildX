@@ -3,6 +3,7 @@ package me.Dupps.GuildX.Managers;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.Dupps.GuildX.Chunks.Chunks;
 import me.Dupps.GuildX.Guilds.Guild;
 
 public class GuildManager {
@@ -18,6 +19,18 @@ public class GuildManager {
 			g.setMembers((ArrayList<String>) cfgm.getGuilds().getStringList(guild + ".members"));
 			g.setAdmins((ArrayList<String>) cfgm.getGuilds().getStringList(guild + ".admins"));
 			g.setLives(cfgm.getGuilds().getInt(guild + ".lives"));
+			
+			//Adds chunks
+			ArrayList<Chunks> chunks = new ArrayList<Chunks>();
+			if(cfgm.getGuilds().getConfigurationSection(guild + ".chunks") != null) {
+				for(String chunk : cfgm.getGuilds().getConfigurationSection(guild + ".chunks").getKeys(false)) {
+					int x = cfgm.getGuilds().getInt(guild + ".chunks."+chunk + ".x");
+					int z = cfgm.getGuilds().getInt(guild + ".chunks."+chunk + ".z");
+					Chunks c = new Chunks(x,z,g.toString());
+					chunks.add(c);
+				}
+				g.setChunks(chunks);
+			}
 			addGuild(g);
 		}
 	}
@@ -33,6 +46,13 @@ public class GuildManager {
 			cfgm.getGuilds().set(g.toString() + ".members",g.getMembers());
 			cfgm.getGuilds().set(g.toString() + ".admins",g.getAdmins());
 			cfgm.getGuilds().set(g.toString() + ".lives",g.getLives());
+			
+			if(g.getChunks() != null && !g.getChunks().isEmpty()) {
+				for(Chunks c : g.getChunks()) {
+					cfgm.getGuilds().set(g.toString() + ".chunks." + c.toString() + ".x", c.getX());
+					cfgm.getGuilds().set(g.toString() + ".chunks." + c.toString() + ".z", c.getZ());
+				}
+			}
 		}
 	}
 	

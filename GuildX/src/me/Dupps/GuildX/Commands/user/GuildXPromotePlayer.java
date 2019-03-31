@@ -61,7 +61,7 @@ public class GuildXPromotePlayer implements CMD {
 								}
 								
 								
-							}else msg.print("msg.guild.error.nothighrank", sender, null, null, null);
+							}else msg.print("msg.guild.error.ranktoolow", sender, null, null, null);
 						}else msg.print("msg.guild.error.vnotinguild", sender, null, null, args[1]);
 					}else msg.print("msg.guild.error.notinguild", sender, null, null, null);
 				}else msg.print("msg.guild.error.promoteself", sender, null, null, null);

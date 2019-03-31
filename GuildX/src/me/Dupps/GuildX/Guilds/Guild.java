@@ -2,10 +2,13 @@ package me.Dupps.GuildX.Guilds;
 
 import java.util.ArrayList;
 
+import me.Dupps.GuildX.Chunks.Chunks;
+
 
 public class Guild {
 	private String guildname,leader;
 	private ArrayList<String> members,admins;
+	private ArrayList<Chunks> chunks;
 	private int lives;
 	
 	public String getGuildname() {
@@ -43,5 +46,11 @@ public class Guild {
 	public String toString() {
 		return guildname;
 		
+	}
+	public ArrayList<Chunks> getChunks() {
+		return chunks;
+	}
+	public void setChunks(ArrayList<Chunks> chunks) {
+		this.chunks = chunks;
 	}
 }
