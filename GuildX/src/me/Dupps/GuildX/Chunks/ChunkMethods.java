@@ -43,4 +43,38 @@ public class ChunkMethods {
 		return null;
 	}
 	
+	public boolean isBordering(int x, int z) {
+		for(Guild g : GuildManager.getGuilds()) {
+			try {
+				for(Chunks c : g.getChunks()) {
+					//Checks for the bordering chunks
+					if((c.getX() + 1 == x && c.getZ() == z)
+						||(c.getX() - 1 == x && c.getZ() == z)
+						||(c.getX() == x && c.getZ() - 1 == z)
+						||(c.getX() == x && c.getZ() + 1 == z))
+						return true;
+				}
+			}
+			catch(NullPointerException e) {}
+		}
+		return false;
+	}
+	
+	public String getBorderingGuild(int x, int z) {
+		for(Guild g : GuildManager.getGuilds()) {
+			try {
+				for(Chunks c : g.getChunks()) {
+					//Checks for the bordering chunks
+					if((c.getX() + 1 == x && c.getZ() == z)
+						||(c.getX() - 1 == x && c.getZ() == z)
+						||(c.getX() == x && c.getZ() - 1 == z)
+						||(c.getX() == x && c.getZ() + 1 == z))
+						return g.toString();
+				}
+			}
+			catch(NullPointerException e) {}
+		}
+		return null;
+	}
+	
 }

@@ -32,6 +32,7 @@ msg:
             promoteself: "&cYou cannot promote yourself"
             demoteself: "&cYou cannot demote yourself"
             lowdemote: "&cYou cannot demote %pstring% any further"
+            bordering: "&cYou cannot claim next to territory owned by %rstring%"
  
 #Error messages (general errors
 error:

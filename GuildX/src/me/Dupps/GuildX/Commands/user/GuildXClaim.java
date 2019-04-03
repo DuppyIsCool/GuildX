@@ -38,23 +38,25 @@ public class GuildXClaim implements CMD {
 				
 				if(gm.isAdmin(puuid) || gm.isLeader(puuid)) {
 					if(!cm.chunkIsClaimed(x,z)) {
-						Chunks c = new Chunks(x,z,g.toString());
-						
-						ArrayList<Chunks> chunks = new ArrayList<Chunks>();
-						chunks = g.getChunks();
-						
-						if(chunks != null && !chunks.isEmpty()) {
-							chunks.add(c);
-						}
-						else {
-							chunks = new ArrayList<Chunks>();
-							chunks.add(c);
-						}
-						
-						g.setChunks(chunks);
-						createBorder(chunk);
-						msg.print("msg.guild.claimed", sender, g.toString(),null, null);
-						
+						if(!cm.isBordering(x, z) || cm.getBorderingGuild(x, z).equalsIgnoreCase(g.toString())) {
+							Chunks c = new Chunks(x,z,g.toString());
+							
+							ArrayList<Chunks> chunks = new ArrayList<Chunks>();
+							chunks = g.getChunks();
+							
+							if(chunks != null && !chunks.isEmpty()) {
+								chunks.add(c);
+							}
+							else {
+								chunks = new ArrayList<Chunks>();
+								chunks.add(c);
+							}
+							
+							g.setChunks(chunks);
+							createBorder(chunk);
+							msg.print("msg.guild.claimed", sender, g.toString(),null, null);
+							
+						}else msg.print("msg.guild.error.bordering", sender, null, null, cm.getBorderingGuild(x, z));
 					}else msg.print("msg.guild.error.chunktaken", sender, null, null, cm.getChunkOwner(x, z));
 				}else msg.print("msg.guild.error.ranktoolow", sender, null, null, null);
 			}else msg.print("msg.guild.error.notinguild", sender, null, null, null);	
@@ -83,7 +85,7 @@ public class GuildXClaim implements CMD {
 		return false;
 	}
 	
-private void createBorder(Chunk c) {
+	private void createBorder(Chunk c) {
 		
 		int x = c.getX() * 16;
 		int z = c.getZ() * 16;
