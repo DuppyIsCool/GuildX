@@ -66,7 +66,7 @@ public class GuildXPromotePlayer implements CMD {
 					}else msg.print("msg.guild.error.notinguild", sender, null, null, null);
 				}else msg.print("msg.guild.error.promoteself", sender, null, null, null);
 			}else msg.print("error.noplayer", sender, null, null, args[1]);
-		}
+		}else msg.print("error.nopermission", sender, null, null, null);
 		
 	}
 		

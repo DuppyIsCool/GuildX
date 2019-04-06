@@ -21,7 +21,7 @@ public class GuildXDeleteOtherGuild implements CMD{
 			}
 			else msg.print("msg.guild.error.doesnotexist", sender, null, null, args[1]);
 		}
-		else msg.print("msg.guild.error.nopermission", sender, null, null, args[1]);
+		else msg.print("error.nopermission", sender, null, null, args[1]);
 		
 	}
 
@@ -47,7 +47,6 @@ public class GuildXDeleteOtherGuild implements CMD{
 				return true;
 			
 		}
-		msg.print("error.nopermission", null, null, null, null);
 		return false;
 	}
 

@@ -40,7 +40,7 @@ public class GuildXCreateGuild implements CMD {
 						}else msg.print("msg.guild.error.nametaken", sender, null, null, args[1]);
 					}else msg.print("msg.guild.error.nametoolong", sender, null, null, null);
 				}else msg.print("msg.guild.error.alreadyinguild", sender, gm.getGuildwPlayer(p.getUniqueId().toString()).toString(), null, null);
-			}else msg.print("msg.guild.error.nopermission", sender, null, null, null);
+			}else msg.print("error.nopermission", sender, null, null, null);
 		}else msg.printToConsole("error.playeronly", null, null, null, null);
 	}
 

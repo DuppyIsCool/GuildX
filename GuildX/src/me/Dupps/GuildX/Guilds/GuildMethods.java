@@ -117,6 +117,42 @@ public class GuildMethods {
 		return null;
 	}
 	
+	public String getName(String uuid) {
+		for(String key: cfgm.getPlayers().getKeys(false)) {
+			if(cfgm.getPlayers().getString(key + ".uuid").equalsIgnoreCase(uuid)) {
+				return key;
+			}
+		}
+		return null;
+	}
+	
+	public boolean isOffline(String uuid) {
+		for(Player p : Bukkit.getOnlinePlayers()) {
+			if(p.getUniqueId().toString().equalsIgnoreCase(uuid))
+				return false;
+		}
+		return true;
+	}
+	
+	public Player getPlayer(String uuid) {
+		if(!isOffline(uuid)) {
+			for(Player p : Bukkit.getOnlinePlayers())
+				if(p.getUniqueId().toString().equalsIgnoreCase(uuid))
+					return p;
+		}
+		return null;
+	}
+	
+	public ArrayList<String> getAllMembers(Guild g){
+		ArrayList<String> members = new ArrayList<String>();
+		members.add(g.getLeader());
+		for(String e : g.getAdmins())
+			members.add(e);
+		for(String e : g.getMembers())
+			members.add(e);
+		return members;
+	}
+	
 
 	public void sendInviteMessage(String displayName, String guild) {
 		for(Player p : Bukkit.getServer().getOnlinePlayers()) {
@@ -154,11 +190,11 @@ public class GuildMethods {
 	public String getRank(String puuid) {
 		for(Guild g : GuildManager.getGuilds()) {
 			if(g.getMembers().contains(puuid))
-				return "member";
+				return "Member";
 			if(g.getAdmins().contains(puuid))
-				return "admin";
+				return "Admin";
 			if(g.getLeader().equals(puuid))
-				return "leader";
+				return "Leader";
 		}
 		return null;
 	}

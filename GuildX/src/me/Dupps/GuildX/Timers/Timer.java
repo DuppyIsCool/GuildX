@@ -41,6 +41,7 @@ public class Timer extends BukkitRunnable {
         		if(ChunkBorderManager.getTime(b) <= 0) {
         			removeBlock.add(b);
         			b.setType((Material) b.getMetadata("SPAWNED").get(0).value());
+        			b.removeMetadata("SPAWNED", Plugin.plugin);
         		}
         		else{
         			ChunkBorderManager.addBlock(b, ChunkBorderManager.getTime(b) -1);

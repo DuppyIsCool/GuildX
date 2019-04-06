@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender;
 
 import me.Dupps.GuildX.Commands.admin.*;
 import me.Dupps.GuildX.Commands.user.*;
+import me.Dupps.GuildX.Guilds.GuildMethods;
 import me.Dupps.GuildX.Managers.MessageManager;
 
 public class CMDExecutor implements CommandExecutor{
@@ -22,6 +23,10 @@ public class CMDExecutor implements CommandExecutor{
 	private GuildXPromotePlayer promote = new GuildXPromotePlayer();
 	private GuildXClaim claim = new GuildXClaim();
 	private GuildXUnclaim unclaim = new GuildXUnclaim();
+	private GuildXInfo info = new GuildXInfo();
+	private GuildXUnclaimAll unclaimall = new GuildXUnclaimAll();
+	
+	private GuildMethods gm = new GuildMethods();
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if(cmd.getName().equalsIgnoreCase("guild")) {
@@ -35,6 +40,18 @@ public class CMDExecutor implements CommandExecutor{
 				
 				if(args.length == 2) {
 					create.Execute(sender,args);
+					return true;
+				}
+				else {
+					msg.print("error.invalidargs", sender, null, null, null);
+					return true;
+				}
+			}
+			
+			if(args[0].equalsIgnoreCase("info")) {
+				
+				if(args.length == 2) {
+					info.Execute(sender,args);
 					return true;
 				}
 				else {
@@ -143,6 +160,10 @@ public class CMDExecutor implements CommandExecutor{
 					unclaim.Execute(sender, args);
 					return true;
 				}
+				else if(args.length == 2 && args[1].equalsIgnoreCase("all")) {
+					unclaimall.Execute(sender, args);
+					return true;
+				}
 				else {
 					msg.print("error.invalidargs", sender, null, null, null);
 					return true;
@@ -159,6 +180,13 @@ public class CMDExecutor implements CommandExecutor{
 					return true;
 				}
 				msg.print("error.invalidargs", sender, null, null, null);
+				return true;
+			}
+			
+			//Displays info for a guild if it's entered
+			if(gm.guildExists(args[0]) && args.length == 1) {
+				String[] inputs = {"info",args[0]};
+				info.Execute(sender, inputs);
 				return true;
 			}
 			
