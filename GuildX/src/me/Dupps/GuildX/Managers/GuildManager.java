@@ -1,6 +1,7 @@
 package me.Dupps.GuildX.Managers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import me.Dupps.GuildX.Chunks.Chunks;
@@ -8,8 +9,9 @@ import me.Dupps.GuildX.Guilds.Guild;
 
 public class GuildManager {
 	private static ArrayList<Guild> guilds = new ArrayList<Guild>();
+	public static ArrayList<String> bannedNames = new ArrayList<String>();
+	public static HashMap<Guild,Integer> raidableGuilds = new HashMap<Guild,Integer>();
 	private ConfigManager cfgm = new ConfigManager();
-	
 	public void setupGuilds() {
 		//Cycles through config file and sets up the object ArrayList of guilds
 		for(String guild : cfgm.getGuilds().getKeys(false)) {
@@ -33,6 +35,10 @@ public class GuildManager {
 			}
 			addGuild(g);
 		}
+		
+		String[] cmds = {"create","delete","claim","unclaim","invite","kick","leave","join","promote","demote","info","reload"};
+		for(String e : cmds)
+			bannedNames.add(e);
 	}
 	
 	public void saveGuilds() {

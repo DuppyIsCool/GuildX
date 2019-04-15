@@ -14,6 +14,7 @@ msg:
         claimed: "&aYou have claimed this chunk"
         unclaimed: "&aYou have unclaimed this chunk"
         error:
+            invalidpage: "&cThat is not a valid page number"
             notinguild: "&cNot in a guild"
             chunknotclaimed: "&cNobody owns this chunk!"
             chunktaken: "&cThis chunk is already claimed"
@@ -33,6 +34,7 @@ msg:
             demoteself: "&cYou cannot demote yourself"
             lowdemote: "&cYou cannot demote %pstring% any further"
             bordering: "&cYou cannot claim next to territory owned by %rstring%"
+            bannedguildname: "&cYou cannot use that guild name"
  
 #Error messages (general errors
 error:
@@ -48,5 +50,11 @@ default:
     guild:
         lives: 10
         namelength: 14
+        raidtime: 100
     invites:
         duration: 120
+    lives:
+        interval: 600
+        increment: 1
+        max: 20
+        

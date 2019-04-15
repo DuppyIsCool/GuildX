@@ -9,7 +9,8 @@ public class Guild {
 	private String guildname,leader;
 	private ArrayList<String> members,admins;
 	private ArrayList<Chunks> chunks;
-	private int lives;
+	private int lives,raidtimer;
+	private boolean raidable;
 	
 	public String getGuildname() {
 		return guildname;
@@ -52,5 +53,17 @@ public class Guild {
 	}
 	public void setChunks(ArrayList<Chunks> chunks) {
 		this.chunks = chunks;
+	}
+	public boolean isRaidable() {
+		return raidable;
+	}
+	public void setRaidable(boolean raidable) {
+		this.raidable = raidable;
+	}
+	public int getRaidtimer() {
+		return raidtimer;
+	}
+	public void setRaidtimer(int raidtimer) {
+		this.raidtimer = raidtimer;
 	}
 }

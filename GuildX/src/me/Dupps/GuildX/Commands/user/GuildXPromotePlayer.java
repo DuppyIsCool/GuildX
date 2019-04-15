@@ -73,7 +73,7 @@ public class GuildXPromotePlayer implements CMD {
 
 	@Override
 	public String getDescription() {
-		return "Promotes a player in the sender's guild";
+		return "Promotes a player in a guild";
 	}
 
 	@Override

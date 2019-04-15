@@ -1,6 +1,7 @@
 package me.Dupps.GuildX.Commands.user;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -15,6 +16,7 @@ import me.Dupps.GuildX.Managers.MessageManager;
 public class GuildXCreateGuild implements CMD {
 	private MessageManager msg = new MessageManager();
 	private GuildMethods gm = new GuildMethods();
+	Pattern p = Pattern.compile("[a-z]");
 	@Override
 	public void Execute(CommandSender sender, String[] args) {
 		if(sender instanceof Player) {
@@ -23,20 +25,21 @@ public class GuildXCreateGuild implements CMD {
 				if(!gm.isInGuild(p.getUniqueId().toString())) {
 					if(args[1].length() <= Plugin.plugin.getConfig().getInt("default.guild.namelength")) {
 						if(!gm.guildExists(args[1])) {
-						
-							//Variable declaration
-							String puuid = p.getUniqueId().toString();
-							Guild guild = new Guild();
-							ArrayList<String> members = new ArrayList<String>();
-							ArrayList<String> admins = new ArrayList<String>();
-							//Putting variables into guild object and adding guild to GuildManager's list
-							guild.setGuildname(args[1]);
-							guild.setLeader(puuid);
-							guild.setLives(Plugin.plugin.getConfig().getInt("default.guild.lives"));
-							guild.setAdmins(admins);
-							guild.setMembers(members);
-							GuildManager.addGuild(guild);
-							msg.print("msg.guild.created", p, guild.toString(), null, null);
+							if(!GuildManager.bannedNames.contains(args[1]) && args[1].matches(".*[a-z].*")) {
+								//Variable declaration
+								String puuid = p.getUniqueId().toString();
+								Guild guild = new Guild();
+								ArrayList<String> members = new ArrayList<String>();
+								ArrayList<String> admins = new ArrayList<String>();
+								//Putting variables into guild object and adding guild to GuildManager's list
+								guild.setGuildname(args[1]);
+								guild.setLeader(puuid);
+								guild.setLives(Plugin.plugin.getConfig().getInt("default.guild.lives"));
+								guild.setAdmins(admins);
+								guild.setMembers(members);
+								GuildManager.addGuild(guild);
+								msg.print("msg.guild.created", p, guild.toString(), null, null);
+							}else msg.print("msg.guild.error.bannedguildname", p,args[1], null, null);
 						}else msg.print("msg.guild.error.nametaken", sender, null, null, args[1]);
 					}else msg.print("msg.guild.error.nametoolong", sender, null, null, null);
 				}else msg.print("msg.guild.error.alreadyinguild", sender, gm.getGuildwPlayer(p.getUniqueId().toString()).toString(), null, null);

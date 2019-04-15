@@ -17,7 +17,7 @@ public class GuildXDeleteOtherGuild implements CMD{
 			if(gm.guildExists(args[1])) {
 				String temp = gm.getGuildwName(args[1]).toString();
 				GuildManager.removeGuild(gm.getGuildwName(args[1]));
-				msg.print("msg.guild.deleted",sender , null, null, temp);
+				msg.print("msg.guild.deleted",sender , temp, null, temp);
 			}
 			else msg.print("msg.guild.error.doesnotexist", sender, null, null, args[1]);
 		}
@@ -32,7 +32,7 @@ public class GuildXDeleteOtherGuild implements CMD{
 
 	@Override
 	public String getUsage() {
-		return "/g delete (name)";
+		return "/guild delete (name)";
 	}
 
 	@Override

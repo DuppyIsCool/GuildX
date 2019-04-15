@@ -41,12 +41,12 @@ public class GuildXUnclaimAll implements CMD{
 
 	@Override
 	public String getDescription() {
-		return "Unclaims a chunk of land for the sender's guild";
+		return "Unclaims all chunks of land for the guild";
 	}
 
 	@Override
 	public String getUsage() {
-		return "/guild unclaim";
+		return "/guild unclaim all";
 	}
 
 	@Override

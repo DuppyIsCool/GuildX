@@ -50,7 +50,7 @@ public class GuildXInvitePlayer implements CMD {
 
 	@Override
 	public String getUsage() {
-		return "/g invite (name)";
+		return "/guild invite (name)";
 	}
 
 	@Override
