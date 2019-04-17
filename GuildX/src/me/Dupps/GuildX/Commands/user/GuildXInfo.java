@@ -14,6 +14,7 @@ import org.bukkit.inventory.meta.SkullMeta;
 import me.Dupps.GuildX.Commands.CMD;
 import me.Dupps.GuildX.Guilds.Guild;
 import me.Dupps.GuildX.Guilds.GuildMethods;
+import me.Dupps.GuildX.Main.Plugin;
 import me.Dupps.GuildX.Managers.MessageManager;
 import net.md_5.bungee.api.ChatColor;
 
@@ -51,12 +52,12 @@ public class GuildXInfo implements CMD {
 				//Setting lore
 				lores.add(ChatColor.GREEN + "Name: "+ChatColor.YELLOW + g.toString());
 				lores.add(ChatColor.GREEN + "Leader: "+ChatColor.YELLOW + gm.getName(g.getLeader()));
-				lores.add(ChatColor.GREEN + "Size: "+ChatColor.YELLOW + gm.getAllMembers(g).size() + " players");
+				lores.add(ChatColor.GREEN + "Players: "+ChatColor.YELLOW + gm.getAllMembers(g).size() + "/"+Plugin.plugin.getConfig().getInt("default.guild.maxplayers"));
 				lores.add(ChatColor.GREEN + "Lives: "+ChatColor.YELLOW + g.getLives());
 				if(g.getChunks() != null && !g.getChunks().isEmpty())
-					lores.add(ChatColor.GREEN + "Claims: "+ChatColor.YELLOW + g.getChunks().size() + "/??");
+					lores.add(ChatColor.GREEN + "Claims: "+ChatColor.YELLOW + g.getChunks().size() +"/" + Plugin.plugin.getConfig().getInt("default.guild.maxchunks"));
 				else
-					lores.add(ChatColor.GREEN + "Claims: "+ChatColor.YELLOW + "0" + "/??");
+					lores.add(ChatColor.GREEN + "Claims: "+ChatColor.YELLOW + "0"+"/" + Plugin.plugin.getConfig().getInt("default.guild.maxchunks"));
 				metas.setLore(lores);
 				item.setItemMeta(metas);
 				//Adds beacon to inventory

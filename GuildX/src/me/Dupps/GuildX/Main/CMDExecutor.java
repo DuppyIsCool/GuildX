@@ -28,6 +28,7 @@ public class CMDExecutor implements CommandExecutor{
 	private GuildXUnclaim unclaim = new GuildXUnclaim();
 	private GuildXInfo info = new GuildXInfo();
 	private GuildXUnclaimAll unclaimall = new GuildXUnclaimAll();
+	private GuildXList list = new GuildXList();
 	
 	private GuildMethods gm = new GuildMethods();
 	@Override
@@ -287,6 +288,17 @@ public class CMDExecutor implements CommandExecutor{
 				else {
 				msg.print("error.nopermission", sender, null, null, null);
 				return true;
+				}
+			}
+			
+			if(args[0].equalsIgnoreCase("list")) {
+				if(args.length <= 2) {
+					list.Execute(sender, args);
+					return true;
+				}
+				else {
+					msg.print("error.invalidargs", sender, null, null, null);
+					return true;
 				}
 			}
 			

@@ -7,7 +7,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import me.Dupps.GuildX.Managers.ConfigManager;
 import me.Dupps.GuildX.Managers.GuildManager;
-import me.Dupps.GuildX.Timers.Timer;
+import me.Dupps.GuildX.Timers.borderTimer;
+import me.Dupps.GuildX.Timers.lifeTimer;
+import me.Dupps.GuildX.Timers.raidTimer;
 
 public class Main extends JavaPlugin{
 	//Variables
@@ -16,8 +18,14 @@ public class Main extends JavaPlugin{
 	private GuildManager guildmanager = new GuildManager();
 	public void onEnable() {
 		Plugin.plugin = this;
+		//Setup timers
 		@SuppressWarnings("unused")
-		Timer timer = new Timer();
+		borderTimer timer = new borderTimer();
+		@SuppressWarnings("unused")
+		raidTimer rtimer = new raidTimer();
+		@SuppressWarnings("unused")
+		lifeTimer ltimer = new lifeTimer();
+		//Declare console sender
 		console = Bukkit.getServer().getConsoleSender();
 		//Sets up events and command execution
 		Bukkit.getServer().getPluginManager().registerEvents(new Events(), this);

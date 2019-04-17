@@ -28,11 +28,13 @@ public class GuildXInvitePlayer implements CMD {
 						if(!args[1].equalsIgnoreCase(p.getName())) {
 							if(gm.isPlayerOnline(args[1])) {
 								if(!gm.isInGuild(gm.getPlayerWName(args[1]).getUniqueId().toString())) {
-									Invites i = new Invites(args[1], guild, Plugin.plugin.getConfig().getInt("default.invites.duration"));
-									InviteManager.addInvite(i);
-									msg.print("msg.guild.sentinvite", sender, guild, null, args[1]);
-									CommandSender s = (CommandSender) gm.getPlayerWName(args[1]);
-									msg.print("msg.guild.receivedinvite", s , null, p, guild);
+									if(gm.getAllMembers(gm.getGuildwName(puuid)).size() + 1 > Plugin.plugin.getConfig().getInt("default.guild.maxplayers")) {
+										Invites i = new Invites(args[1], guild, Plugin.plugin.getConfig().getInt("default.invites.duration"));
+										InviteManager.addInvite(i);
+										msg.print("msg.guild.sentinvite", sender, guild, null, args[1]);
+										CommandSender s = (CommandSender) gm.getPlayerWName(args[1]);
+										msg.print("msg.guild.receivedinvite", s , null, p, guild);
+									}else msg.print("msg.guild.error.maxplayersinguild", sender, null, null, null);
 								}else msg.print("msg.guild.error.playeralreadyinguild", sender, null, gm.getPlayerWName(args[1]), null);
 							}else { msg.print("error.playernotonline",sender,null,null,args[1]);}
 						}else msg.print("msg.guild.error.inviteself", sender, guild, null, null);

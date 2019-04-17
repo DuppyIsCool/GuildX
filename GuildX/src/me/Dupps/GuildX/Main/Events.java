@@ -2,6 +2,7 @@ package me.Dupps.GuildX.Main;
 
 
 import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -11,9 +12,10 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.metadata.FixedMetadataValue;
 
+import me.Dupps.GuildX.Chunks.ChunkMethods;
 import me.Dupps.GuildX.Guilds.Guild;
 import me.Dupps.GuildX.Guilds.GuildMethods;
 import me.Dupps.GuildX.Managers.ChunkBorderManager;
@@ -24,6 +26,7 @@ import net.md_5.bungee.api.ChatColor;
 public class Events implements Listener{
 	private ConfigManager cfgm = new ConfigManager();
 	private GuildMethods gm = new GuildMethods();
+	private ChunkMethods cm = new ChunkMethods();
 	@EventHandler
 	public void onBlockBreak(BlockBreakEvent e) {
 		Block b = e.getBlock();
@@ -33,12 +36,27 @@ public class Events implements Listener{
 			b.removeMetadata("SPAWNED", Plugin.plugin);
 			ChunkBorderManager.removeBlock(b);
 		}
+		Chunk c = e.getBlock().getChunk();
+		if(cm.chunkIsClaimed(c.getX(), c.getZ()) && !e.getPlayer().isOp() && !gm.getGuildwName(cm.getChunkOwner(c.getX(), c.getZ())).isRaidable())
+			e.setCancelled(true);
+	}
+	
+	@EventHandler
+	public void onInteract(PlayerInteractEvent e) {
+		if(e.getClickedBlock()!=null) {
+			if(!e.getClickedBlock().getType().equals(Material.AIR)) {
+				Chunk c = e.getClickedBlock().getChunk();
+				if(cm.chunkIsClaimed(c.getX(), c.getZ()) && !e.getPlayer().isOp() && !gm.getGuildwName(cm.getChunkOwner(c.getX(), c.getZ())).isRaidable())
+					e.setCancelled(true);
+			}
+		}
 	}
 	
 	@EventHandler
 	public void blockPlaced(BlockPlaceEvent event) {
-		Block b = event.getBlock();
-		b.setMetadata("PLACED", new FixedMetadataValue(Plugin.plugin, "something"));
+		Chunk c = event.getBlock().getChunk();
+		if(cm.chunkIsClaimed(c.getX(), c.getZ()) && !event.getPlayer().isOp() && !gm.getGuildwName(cm.getChunkOwner(c.getX(), c.getZ())).isRaidable())
+			event.setCancelled(true);
 	}
 	
 	@EventHandler

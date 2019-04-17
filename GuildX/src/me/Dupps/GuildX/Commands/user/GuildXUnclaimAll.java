@@ -32,7 +32,7 @@ public class GuildXUnclaimAll implements CMD{
 					
 					//Removes all guild chunks
 					g.setChunks(new ArrayList<Chunks>());
-					
+					msg.print("msg.guild.unclaimall", sender, null, null, null);
 				}else msg.print("msg.guild.error.ranktoolow", sender, null, null, null);
 			}else msg.print("msg.guild.error.notinguild", sender, null, null, null);	
 		}else msg.print("error.nopermission", sender, null, null, null);

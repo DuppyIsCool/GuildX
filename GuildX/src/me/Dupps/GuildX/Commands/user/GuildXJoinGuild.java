@@ -16,6 +16,7 @@ public class GuildXJoinGuild implements CMD {
 		if(canExecute(sender)) {
 			Player p = (Player) sender;
 			String puuid = p.getUniqueId().toString();
+			
 			if(!gm.isInGuild(puuid)) {
 				if(gm.hasInvite(p.getName(), args[1])) {
 					if(gm.guildExists(args[1])) {
