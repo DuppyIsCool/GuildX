@@ -14,6 +14,7 @@ msg:
         claimed: "&aYou have claimed this chunk"
         unclaimed: "&aYou have unclaimed this chunk"
         unclaimall: "&aYou have unclaimed all your guild's chunks"
+        enterclaim: "&aYou have entered land owned by %rstring%"
         error:
             invalidpage: "&cThat is not a valid page number"
             notinguild: "&cNot in a guild"

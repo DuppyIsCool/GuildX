@@ -14,6 +14,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 
 import me.Dupps.GuildX.Chunks.ChunkMethods;
 import me.Dupps.GuildX.Guilds.Guild;
@@ -21,12 +22,14 @@ import me.Dupps.GuildX.Guilds.GuildMethods;
 import me.Dupps.GuildX.Managers.ChunkBorderManager;
 import me.Dupps.GuildX.Managers.ConfigManager;
 import me.Dupps.GuildX.Managers.GuildManager;
+import me.Dupps.GuildX.Managers.MessageManager;
 import net.md_5.bungee.api.ChatColor;
 
 public class Events implements Listener{
 	private ConfigManager cfgm = new ConfigManager();
 	private GuildMethods gm = new GuildMethods();
 	private ChunkMethods cm = new ChunkMethods();
+	private MessageManager msg = new MessageManager();
 	@EventHandler
 	public void onBlockBreak(BlockBreakEvent e) {
 		Block b = e.getBlock();
@@ -49,6 +52,28 @@ public class Events implements Listener{
 				if(cm.chunkIsClaimed(c.getX(), c.getZ()) && !e.getPlayer().isOp() && !gm.getGuildwName(cm.getChunkOwner(c.getX(), c.getZ())).isRaidable())
 					e.setCancelled(true);
 			}
+		}
+	}
+	
+	@EventHandler
+	public void onPlayerMove(PlayerMoveEvent e) {
+		int fromz = e.getFrom().getChunk().getZ();
+		int fromx = e.getFrom().getChunk().getX();
+		int endz = e.getTo().getChunk().getZ();
+		int endx = e.getTo().getChunk().getX();
+		Player p = e.getPlayer();
+		
+		if(!cm.chunkIsClaimed(fromx, fromz) && cm.chunkIsClaimed(endx, endz)) {
+			p.sendTitle("", ChatColor.YELLOW + cm.getChunkOwner(endx, endz), 2, 15, 2);
+			msg.print("msg.guild.enterclaim", p, cm.getChunkOwner(endx, endz), null, cm.getChunkOwner(endx, endz));
+		}
+		
+		else if(cm.chunkIsClaimed(fromx, fromz) && cm.chunkIsClaimed(endx, endz)) {
+			if(!cm.getChunkOwner(fromx, fromz).equals(cm.getChunkOwner(endx, endz))) {
+				p.sendTitle("", ChatColor.YELLOW + cm.getChunkOwner(endx, endz), 2, 15, 2);
+				msg.print("msg.guild.enterclaim", p, cm.getChunkOwner(endx, endz), null, cm.getChunkOwner(endx, endz));
+			}
+				
 		}
 	}
 	

@@ -5,9 +5,23 @@ import java.util.ArrayList;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
-import me.Dupps.GuildX.Commands.admin.*;
-import me.Dupps.GuildX.Commands.user.*;
+import me.Dupps.GuildX.Commands.admin.GuildXReload;
+import me.Dupps.GuildX.Commands.user.GuildXClaim;
+import me.Dupps.GuildX.Commands.user.GuildXCreateGuild;
+import me.Dupps.GuildX.Commands.user.GuildXDeleteGuild;
+import me.Dupps.GuildX.Commands.user.GuildXDeleteOtherGuild;
+import me.Dupps.GuildX.Commands.user.GuildXDemotePlayer;
+import me.Dupps.GuildX.Commands.user.GuildXInfo;
+import me.Dupps.GuildX.Commands.user.GuildXInvitePlayer;
+import me.Dupps.GuildX.Commands.user.GuildXJoinGuild;
+import me.Dupps.GuildX.Commands.user.GuildXKickPlayer;
+import me.Dupps.GuildX.Commands.user.GuildXLeaveGuild;
+import me.Dupps.GuildX.Commands.user.GuildXList;
+import me.Dupps.GuildX.Commands.user.GuildXPromotePlayer;
+import me.Dupps.GuildX.Commands.user.GuildXUnclaim;
+import me.Dupps.GuildX.Commands.user.GuildXUnclaimAll;
 import me.Dupps.GuildX.Guilds.GuildMethods;
 import me.Dupps.GuildX.Managers.MessageManager;
 import net.md_5.bungee.api.ChatColor;
@@ -57,6 +71,17 @@ public class CMDExecutor implements CommandExecutor{
 				if(args.length == 2) {
 					info.Execute(sender,args);
 					return true;
+				}
+				else if(args.length == 1) {
+					if(sender instanceof Player) {
+						Player p = (Player) sender;
+						if(gm.isInGuild(p.getUniqueId().toString())) {
+							String[] inputs = {"info",gm.getGuildwPlayer(p.getUniqueId().toString()).toString()};
+							info.Execute(sender,inputs);
+							return true;
+						}
+					}
+					
 				}
 				else {
 					msg.print("error.invalidargs", sender, null, null, null);
@@ -303,10 +328,13 @@ public class CMDExecutor implements CommandExecutor{
 			}
 			
 			//Displays info for a guild if it's entered
-			if(gm.guildExists(args[0]) && args.length == 1) {
-				String[] inputs = {"info",args[0]};
-				info.Execute(sender, inputs);
-				return true;
+			if(gm.guildExists(args[0])) {
+				if(args.length == 1) {
+					String[] inputs = {"info",args[0]};
+					info.Execute(sender, inputs);
+					return true;
+				}
+				 
 			}
 			
 			
