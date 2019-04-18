@@ -7,6 +7,7 @@ import me.Dupps.GuildX.Managers.GuildManager;
 
 public class ChunkMethods {
 
+	//Loops through all guild's chunks to see if the x and z match
 	public boolean chunkIsClaimed(int x, int z) {
 		for(Guild g : GuildManager.getGuilds()) {
 			try {
@@ -20,6 +21,7 @@ public class ChunkMethods {
 		return false;
 	}
 	
+	//Similar to chunkIsClaimed, but returns guild name
 	public String getChunkOwner(int x,int z) {
 		for(Guild g : GuildManager.getGuilds()) {
 			for(Chunks c : g.getChunks()) {
@@ -30,6 +32,7 @@ public class ChunkMethods {
 		return null;
 	}
 	
+	//Removes a chunk from an array list of chunks
 	public ArrayList<Chunks> removeChunk(ArrayList<Chunks> chunks, int x, int z) {
 		if(chunks != null && !chunks.isEmpty()) {
 			for(Chunks c : chunks) {
@@ -43,6 +46,7 @@ public class ChunkMethods {
 		return null;
 	}
 	
+	//Loops through all guild's chunks, to see if their x or z coord is + or - 1 of the inputed coords.
 	public boolean isBordering(int x, int z) {
 		for(Guild g : GuildManager.getGuilds()) {
 			try {
@@ -60,6 +64,7 @@ public class ChunkMethods {
 		return false;
 	}
 	
+	//Similar to isBordering method, but returns guild name
 	public String getBorderingGuild(int x, int z) {
 		for(Guild g : GuildManager.getGuilds()) {
 			try {

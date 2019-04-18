@@ -12,6 +12,7 @@ import net.md_5.bungee.api.ChatColor;
 
 public class GuildMethods {
 	ConfigManager cfgm = new ConfigManager();
+	
 	public boolean isInGuild(String puuid) {
 		
 		for(Guild g : GuildManager.getGuilds()) {

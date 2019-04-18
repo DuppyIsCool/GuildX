@@ -20,6 +20,7 @@ public class GuildXLeaveGuild implements CMD{
 			Player p = (Player) sender;
 			String puuid = p.getUniqueId().toString();
 			
+			//Removes them from the guild
 			if(gm.isInGuild(puuid)) {
 				
 				Guild g = gm.getGuildwPlayer(puuid);

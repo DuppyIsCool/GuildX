@@ -17,6 +17,7 @@ public class GuildXJoinGuild implements CMD {
 			Player p = (Player) sender;
 			String puuid = p.getUniqueId().toString();
 			
+			//Checks if they have an invite and then delete that invite and add them to the guild.
 			if(!gm.isInGuild(puuid)) {
 				if(gm.hasInvite(p.getName(), args[1])) {
 					if(gm.guildExists(args[1])) {

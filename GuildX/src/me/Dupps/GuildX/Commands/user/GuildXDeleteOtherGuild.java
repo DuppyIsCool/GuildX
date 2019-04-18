@@ -13,6 +13,7 @@ public class GuildXDeleteOtherGuild implements CMD{
 	private GuildMethods gm = new GuildMethods();
 	@Override
 	public void Execute(CommandSender sender, String[] args) {
+		//Removes the inputed guild object from GuildManager's arraylist of guilds.
 		if(canExecute(sender)) { 
 			if(gm.guildExists(args[1])) {
 				String temp = gm.getGuildwName(args[1]).toString();

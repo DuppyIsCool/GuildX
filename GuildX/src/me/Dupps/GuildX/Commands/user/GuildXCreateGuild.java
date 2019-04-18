@@ -26,6 +26,8 @@ public class GuildXCreateGuild implements CMD {
 					if(args[1].length() <= Plugin.plugin.getConfig().getInt("default.guild.namelength")) {
 						if(!gm.guildExists(args[1])) {
 							if(!GuildManager.bannedNames.contains(args[1]) && args[1].matches(".*[a-z].*")) {
+								//By this point the inputed name should not be taken, should not be banned, and is short enough.
+								
 								//Variable declaration
 								String puuid = p.getUniqueId().toString();
 								Guild guild = new Guild();

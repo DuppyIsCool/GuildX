@@ -12,6 +12,7 @@ public class GuildXReload implements CMD{
 	@Override
 	public void Execute(CommandSender sender, String[] args) {
 		if(canExecute(sender)) {
+			//Reloads the configurations
 			cfgm.reloadGuilds();
 			cfgm.reloadPlayers();
 			msg.print("msg.guild.reloaded", sender, null, null,null);

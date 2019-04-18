@@ -26,21 +26,30 @@ public class GuildXClaim implements CMD {
 	public void Execute(CommandSender sender, String[] args) {
 		if(canExecute(sender)) {
 			
+			//Variables
 			Player p = (Player) sender;
 			String puuid = p.getUniqueId().toString();
 			int x = p.getLocation().getChunk().getX();
 			int z = p.getLocation().getChunk().getZ();
 			Chunk chunk = p.getLocation().getChunk();
 			
+			//Checks if they are in a guild
 			if(gm.isInGuild(puuid)) {
 				
 				Guild g = gm.getGuildwPlayer(puuid);
 				
+				//Checks if they are an admin or leader
 				if(gm.isAdmin(puuid) || gm.isLeader(puuid)) {
+					
+					//Checks to make sure they are not bordering another claim. Allows for them to claim next to themselves 
 					if(!cm.chunkIsClaimed(x,z)) {
 						if(!cm.isBordering(x, z) || cm.getBorderingGuild(x, z).equalsIgnoreCase(g.toString())) {
 							Chunks c = new Chunks(x,z,g.toString());
-							
+							/*It's a little funky:
+							 * It makes sure that their chunk arraylist isn't null,
+							 * or else it will error out. So, if it is, a new arraylist of chunks is made
+							 * and the guild's chunks is set to that. If it's not, it simply adds the chunk to the guild's chunklist.
+							 */
 							ArrayList<Chunks> chunks = new ArrayList<Chunks>();
 							chunks = g.getChunks();
 							
@@ -85,6 +94,7 @@ public class GuildXClaim implements CMD {
 		return false;
 	}
 	
+	//This creates a border of glowstone around the chunk that despawns after a set time.
 	private void createBorder(Chunk c) {
 		
 		int x = c.getX() * 16;
@@ -92,6 +102,8 @@ public class GuildXClaim implements CMD {
 		org.bukkit.World w = c.getWorld();
 		int time = 15;
 		
+		//All glowstone blocks are tagged with "SPAWNED" so that the program can tell if they are spawned.
+		//Blocks are also added to the ChunkBorderManager so they can be queued for despawning.
 		for(int i = 1; i < 16; i ++) {
 			Block b = w.getHighestBlockAt(x+i,z).getLocation().add(0,-1,0).getBlock();
 			b.setMetadata("SPAWNED", new FixedMetadataValue(Plugin.plugin, b.getType()));

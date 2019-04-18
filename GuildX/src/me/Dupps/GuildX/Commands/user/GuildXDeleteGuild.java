@@ -15,6 +15,7 @@ public class GuildXDeleteGuild implements CMD {
 	private MessageManager msg = new MessageManager();
 	@Override
 	public void Execute(CommandSender sender, String[] args) {
+		//Removes the sender's guild object from GuildManager's arraylist of guilds.
 		if((sender instanceof Player)) {
 			Player p = (Player) sender;
 			

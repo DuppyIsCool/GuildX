@@ -22,16 +22,18 @@ public class GuildXList implements CMD{
 			pages++;
 		
 		if(args.length == 1) {
+			//Checks to make sure there are guilds.
 			if(!GuildManager.getGuilds().isEmpty()) {
 				sender.sendMessage(ChatColor.GOLD + "===" + ChatColor.GREEN + "Guilds" + ChatColor.GOLD + "===");
+				//Loops for 8 times (number of entries in the page)
 				for(int i = 0; i < 8; i ++) {
-					if(i < GuildManager.getGuilds().size()) {
-						g = GuildManager.getGuilds().get(i);
-						if(g.getChunks() != null && !g.getChunks().isEmpty())
+					if(i < GuildManager.getGuilds().size()) { //Make sure it doesn't head out of bounds
+						g = GuildManager.getGuilds().get(i); //Grab guild
+						if(g.getChunks() != null && !g.getChunks().isEmpty()) //Run as normal
 						sender.sendMessage(ChatColor.GREEN + g.toString()+ 
 								ChatColor.GOLD + " "+ gm.getAllMembers(g).size()+ "/" + g.getChunks().size() + "/"+ g.getLives());
 						else
-							sender.sendMessage(ChatColor.GREEN + g.toString()+ 
+							sender.sendMessage(ChatColor.GREEN + g.toString()+ //Runs if the chunks are empty.
 									ChatColor.GOLD +" "+ gm.getAllMembers(g).size()+ "/" + 0 + "/"+ g.getLives());
 					}
 				}
@@ -41,7 +43,7 @@ public class GuildXList implements CMD{
 		}
 		else if(args.length == 2) {
 			if(!GuildManager.getGuilds().isEmpty()) {
-				if(isNumeric(args[1])) {
+				if(isNumeric(args[1])) { //Makes sure the second entry of args is an arabic number.
 					int num = Integer.parseInt(args[1]);
 					if(!(num > pages) && num >= 0) {
 						sender.sendMessage(ChatColor.GOLD + "===" + ChatColor.GREEN + "Guilds" + ChatColor.GOLD + "===");
@@ -92,6 +94,7 @@ public class GuildXList implements CMD{
 		return false;
 	}
 	
+	//Checks if a string is numeric
 	private static boolean isNumeric(String str) {
 	  return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
 	}

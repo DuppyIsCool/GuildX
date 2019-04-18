@@ -20,15 +20,17 @@ public class GuildXInvitePlayer implements CMD {
 			Player p = (Player) sender;
 			String puuid = p.getUniqueId().toString();
 			
-			//Lmao I can't even read this!
-			if(gm.isInGuild(puuid)) {
+			//Lmao I can't even read this! - Duppy
+			if(gm.isInGuild(puuid)) { //Checks if the sender is in a guild
 				String guild = gm.getGuildwPlayer(puuid).toString();
-				if(gm.isAdmin(puuid) || gm.isLeader(puuid)) {
-					if(!gm.hasInvite(args[1], guild)) {
-						if(!args[1].equalsIgnoreCase(p.getName())) {
-							if(gm.isPlayerOnline(args[1])) {
-								if(!gm.isInGuild(gm.getPlayerWName(args[1]).getUniqueId().toString())) {
+				if(gm.isAdmin(puuid) || gm.isLeader(puuid)) { //Checks if they are admin or higher
+					if(!gm.hasInvite(args[1], guild)) { //Checks to make sure sender doesn't already have an invite
+						if(!args[1].equalsIgnoreCase(p.getName())) { //Checks to make sure they aren't inviting themselves
+							if(gm.isPlayerOnline(args[1])) { //Checks if they the victim is online
+								if(!gm.isInGuild(gm.getPlayerWName(args[1]).getUniqueId().toString())) { //Checks to make sure the player isn't already in a guild.
+									//Checks to make sure the guild hasn't reached their max player amount.
 									if(gm.getAllMembers(gm.getGuildwName(puuid)).size() + 1 > Plugin.plugin.getConfig().getInt("default.guild.maxplayers")) {
+										//Creates an invite object.
 										Invites i = new Invites(args[1], guild, Plugin.plugin.getConfig().getInt("default.invites.duration"));
 										InviteManager.addInvite(i);
 										msg.print("msg.guild.sentinvite", sender, guild, null, args[1]);

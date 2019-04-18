@@ -20,6 +20,7 @@ public class GuildXUnclaim implements CMD {
 	public void Execute(CommandSender sender, String[] args) {
 		if(canExecute(sender)) {
 			
+			//Variable Declaration
 			Player p = (Player) sender;
 			String puuid = p.getUniqueId().toString();
 			int x = p.getLocation().getChunk().getX();
@@ -32,7 +33,7 @@ public class GuildXUnclaim implements CMD {
 				if(gm.isAdmin(puuid) || gm.isLeader(puuid)) {
 					if(cm.chunkIsClaimed(x,z)) {
 						if(cm.getChunkOwner(x, z).equalsIgnoreCase(g.toString())) {
-							
+							//Gets chunk arraylist, and removes the current chunk from the list.
 							ArrayList<Chunks> chunks = new ArrayList<Chunks>();
 							chunks = g.getChunks();
 							g.setChunks(cm.removeChunk(chunks, x, z));
