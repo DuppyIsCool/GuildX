@@ -106,28 +106,32 @@ public class GuildXClaim implements CMD {
 		//Blocks are also added to the ChunkBorderManager so they can be queued for despawning.
 		for(int i = 1; i < 16; i ++) {
 			Block b = w.getHighestBlockAt(x+i,z).getLocation().add(0,-1,0).getBlock();
-			b.setMetadata("SPAWNED", new FixedMetadataValue(Plugin.plugin, b.getType()));
+			if(!b.hasMetadata("SPAWNED"))
+				b.setMetadata("SPAWNED", new FixedMetadataValue(Plugin.plugin, b.getType()));
 			b.setType(Material.GLOWSTONE);
 			ChunkBorderManager.addBlock(b, time);
 		}
 		
 		for(int i = 0; i < 16; i ++) {
 			Block b = w.getHighestBlockAt(x,z+i).getLocation().add(0,-1,0).getBlock();
-			b.setMetadata("SPAWNED", new FixedMetadataValue(Plugin.plugin, b.getType()));
+			if(!b.hasMetadata("SPAWNED"))
+				b.setMetadata("SPAWNED", new FixedMetadataValue(Plugin.plugin, b.getType()));
 			b.setType(Material.GLOWSTONE);
 			ChunkBorderManager.addBlock(b, time);
 		}
 		
 		for(int i = 0; i < 15; i ++) {
 			Block b = w.getHighestBlockAt(x-i+15,z+15).getLocation().add(0,-1,0).getBlock();
-			b.setMetadata("SPAWNED", new FixedMetadataValue(Plugin.plugin, b.getType()));
+			if(!b.hasMetadata("SPAWNED"))
+				b.setMetadata("SPAWNED", new FixedMetadataValue(Plugin.plugin, b.getType()));
 			b.setType(Material.GLOWSTONE);
 			ChunkBorderManager.addBlock(b, time);
 		}
 		
 		for(int i = 1; i < 15; i ++) {
 			Block b = w.getHighestBlockAt(x+15,z-i+15).getLocation().add(0,-1,0).getBlock();
-			b.setMetadata("SPAWNED", new FixedMetadataValue(Plugin.plugin, b.getType()));
+			if(!b.hasMetadata("SPAWNED"))
+				b.setMetadata("SPAWNED", new FixedMetadataValue(Plugin.plugin, b.getType()));
 			b.setType(Material.GLOWSTONE);
 			ChunkBorderManager.addBlock(b, time);
 		}
