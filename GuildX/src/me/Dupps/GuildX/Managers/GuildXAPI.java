@@ -7,7 +7,7 @@ import me.Dupps.GuildX.Chunks.ChunkMethods;
 import me.Dupps.GuildX.Guilds.Guild;
 import me.Dupps.GuildX.Guilds.GuildMethods;
 
-public class APIManager {
+public class GuildXAPI {
 	
 	private  ChunkMethods cm = new ChunkMethods();
 	private   GuildMethods gm = new GuildMethods();
