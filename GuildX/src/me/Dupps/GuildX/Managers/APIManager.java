@@ -10,7 +10,7 @@ import me.Dupps.GuildX.Guilds.GuildMethods;
 public class APIManager {
 	
 	private  ChunkMethods cm = new ChunkMethods();
-	private  GuildMethods gm = new GuildMethods();
+	private   GuildMethods gm = new GuildMethods();
 	
 	public  boolean isInGuild(String playeruuid) {
 		return gm.isInGuild(playeruuid);
@@ -48,8 +48,26 @@ public class APIManager {
 	public  Player getPlayer(String playeruuid) {
 		return gm.getPlayer(playeruuid);
 	}
-	public ArrayList<String> getAllMembers(Guild g){
+	public  ArrayList<String> getAllMembers(Guild g){
 		return gm.getAllMembers(g);
+	}
+	public  void addPlayerToGuild(String playeruuid, String guild){
+		gm.addPlayerToGuild(playeruuid,guild);
+	}
+	public  String getRank(String playeruuid){
+		return gm.getRank(playeruuid);
+	}
+	public  boolean chunkIsClaimed(int x, int z){
+		return cm.chunkIsClaimed(x,z);
+	}
+	public  String getChunkOwner(int x, int z){
+		return cm.getChunkOwner(x,z);
+	}
+	public  boolean isBordering(int x, int z){
+		return cm.isBordering(x,z);
+	}
+	public  String getBorderingGuild(int x, int z){
+		return cm.getBorderingGuild(x,z);
 	}
 
 }
