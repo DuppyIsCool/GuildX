@@ -25,7 +25,7 @@ public class GuildXCreateGuild implements CMD {
 				if(!gm.isInGuild(p.getUniqueId().toString())) {
 					if(args[1].length() <= Plugin.plugin.getConfig().getInt("default.guild.namelength")) {
 						if(!gm.guildExists(args[1])) {
-							if(!GuildManager.bannedNames.contains(args[1]) && args[1].matches(".*[a-z].*")) {
+							if(!bannedName(args[1])) {
 								//By this point the inputed name should not be taken, should not be banned, and is short enough.
 								
 								//Variable declaration
@@ -68,6 +68,15 @@ public class GuildXCreateGuild implements CMD {
 		else if(sender.isOp())
 			return true;
 		
+		return false;
+	}
+	
+	private boolean bannedName(String name) {
+		if(name.matches(".*[a-z].*"))
+			return true;
+		for(String e : GuildManager.bannedNames)
+			if(name.equalsIgnoreCase(e))
+				return true;
 		return false;
 	}
 	

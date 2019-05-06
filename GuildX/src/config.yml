@@ -57,6 +57,7 @@ default:
         raidtime: 100
         maxchunks: 5
         maxplayers: 10
+        bannednames: Poop,Loser,DummyHead
     invites:
         duration: 120
     lives:

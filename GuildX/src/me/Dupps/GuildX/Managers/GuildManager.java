@@ -6,6 +6,7 @@ import java.util.List;
 
 import me.Dupps.GuildX.Chunks.Chunks;
 import me.Dupps.GuildX.Guilds.Guild;
+import me.Dupps.GuildX.Main.Plugin;
 
 public class GuildManager {
 	private static ArrayList<Guild> guilds = new ArrayList<Guild>();
@@ -35,10 +36,8 @@ public class GuildManager {
 			}
 			addGuild(g);
 		}
-		
-		String[] cmds = {"create","delete","claim","unclaim","invite","kick","leave","join","promote","demote","info","reload"};
-		for(String e : cmds)
-			bannedNames.add(e);
+		//Sets up banned names
+		getBannedNames();
 	}
 	
 	public void saveGuilds() {
@@ -72,6 +71,19 @@ public class GuildManager {
 	
 	public static void removeGuild(Guild g) {
 		guilds.remove(g);
+	}
+	
+	private void getBannedNames() {
+		String s = Plugin.plugin.getConfig().getString("default.guild.bannednames");
+		String[] cmds = {"create","delete","claim","unclaim","invite","kick","leave","join","promote","demote","info","reload"};
+		if(s != null && !s.isEmpty()) {
+			String[] array = s.split(",");
+			for(String e : array)
+				bannedNames.add(e);
+		}
+		for(String e : cmds)
+			bannedNames.add(e);
+			
 	}
 	
 }
