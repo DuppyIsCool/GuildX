@@ -12,6 +12,7 @@ public class lifeTimer extends BukkitRunnable{
 	private long now;
     private long later;
     private Main plugin;
+    
     public lifeTimer() {
     	this.plugin = Plugin.plugin;
         lifeInterval = 0;

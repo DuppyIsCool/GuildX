@@ -16,6 +16,7 @@ public class borderTimer extends BukkitRunnable {
 	private long now;
     private long later;
     private Main plugin;
+    
     public borderTimer() {
     	this.plugin = Plugin.plugin;
         borderInterval = 0;

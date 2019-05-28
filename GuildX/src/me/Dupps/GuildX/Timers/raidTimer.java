@@ -17,6 +17,7 @@ public class raidTimer extends BukkitRunnable {
 	private long now;
     private long later;
     private Main plugin;
+    
 	public raidTimer() {
 	    	this.plugin = Plugin.plugin;
 	        raidInterval = 0;

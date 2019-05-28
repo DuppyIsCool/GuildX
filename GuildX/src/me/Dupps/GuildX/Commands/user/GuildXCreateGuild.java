@@ -72,11 +72,15 @@ public class GuildXCreateGuild implements CMD {
 	}
 	
 	private boolean bannedName(String name) {
-		if(name.matches(".*[a-z].*"))
+		if(!name.toLowerCase().matches(".*[a-z].*"))
 			return true;
-		for(String e : GuildManager.bannedNames)
-			if(name.equalsIgnoreCase(e))
-				return true;
+		if(GuildManager.bannedNames != null && !GuildManager.bannedNames.isEmpty()) {
+			for(String e : GuildManager.bannedNames) {;
+				if(name.equalsIgnoreCase(e))
+					return true;
+					
+			}
+		}
 		return false;
 	}
 	
