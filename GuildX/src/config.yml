@@ -39,7 +39,7 @@ msg:
             bannedguildname: "&cYou cannot use that guild name"
             noguilds: "&cThere are no guilds"
             maxplayersinguild: "&cYou have met the max amount of players in your guild"
- 
+            maxchunksclaimed: "&cYou have claimed the max amount of chunks"
 #Error messages (general errors
 error:
     nopermission: "&cNo perm"

@@ -63,17 +63,23 @@ public class Events implements Listener{
 		int endx = e.getTo().getChunk().getX();
 		Player p = e.getPlayer();
 		
+		//Entering from wilderness to a claim
 		if(!cm.chunkIsClaimed(fromx, fromz) && cm.chunkIsClaimed(endx, endz)) {
 			p.sendTitle("", ChatColor.YELLOW + cm.getChunkOwner(endx, endz), 2, 15, 2);
 			msg.print("msg.guild.enterclaim", p, cm.getChunkOwner(endx, endz), null, cm.getChunkOwner(endx, endz));
 		}
 		
+		//Entering from a claim to another claim
 		else if(cm.chunkIsClaimed(fromx, fromz) && cm.chunkIsClaimed(endx, endz)) {
 			if(!cm.getChunkOwner(fromx, fromz).equals(cm.getChunkOwner(endx, endz))) {
 				p.sendTitle("", ChatColor.YELLOW + cm.getChunkOwner(endx, endz), 2, 15, 2);
 				msg.print("msg.guild.enterclaim", p, cm.getChunkOwner(endx, endz), null, cm.getChunkOwner(endx, endz));
 			}
 				
+		}
+		//Entering wilderness from a claim
+		else if(cm.chunkIsClaimed(fromx, fromz) && !cm.chunkIsClaimed(endx, endz)) {
+			p.sendTitle("", ChatColor.GRAY + "Wilderness", 2, 15, 2);
 		}
 	}
 	

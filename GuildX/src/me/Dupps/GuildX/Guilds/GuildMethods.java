@@ -151,6 +151,7 @@ public class GuildMethods {
 			members.add(e);
 		for(String e : g.getMembers())
 			members.add(e);
+		
 		return members;
 	}
 	

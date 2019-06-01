@@ -286,8 +286,9 @@ public class CMDExecutor implements CommandExecutor{
 					}
 					else if(args.length == 2) {
 						if(isNumeric(args[1])) {
-							int num = Integer.parseInt(args[1]);
-							if(!(num > pages)) {
+							//If user enters page '1' I want them to display the first page, which is page 0, and so on.
+							int num = Integer.parseInt(args[1]) - 1;
+							if(!(num > pages) && !(num <= 0)) {
 								sender.sendMessage(ChatColor.GOLD + "===" + ChatColor.GREEN + "GuildX Commands" + ChatColor.GOLD + "===");
 								for(int i = num * 8 + 1; i < num * 8 + 8; i++) {
 									if(i < commandusage.size()) {

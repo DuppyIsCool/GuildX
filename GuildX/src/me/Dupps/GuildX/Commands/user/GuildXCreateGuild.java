@@ -1,7 +1,6 @@
 package me.Dupps.GuildX.Commands.user;
 
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -16,7 +15,6 @@ import me.Dupps.GuildX.Managers.MessageManager;
 public class GuildXCreateGuild implements CMD {
 	private MessageManager msg = new MessageManager();
 	private GuildMethods gm = new GuildMethods();
-	Pattern p = Pattern.compile("[a-z]");
 	@Override
 	public void Execute(CommandSender sender, String[] args) {
 		if(sender instanceof Player) {
@@ -39,7 +37,10 @@ public class GuildXCreateGuild implements CMD {
 								guild.setLives(Plugin.plugin.getConfig().getInt("default.guild.lives"));
 								guild.setAdmins(admins);
 								guild.setMembers(members);
+								
+								//Add Guild to GuildManager
 								GuildManager.addGuild(guild);
+								
 								msg.print("msg.guild.created", p, guild.toString(), null, null);
 							}else msg.print("msg.guild.error.bannedguildname", p,args[1], null, null);
 						}else msg.print("msg.guild.error.nametaken", sender, null, null, args[1]);
@@ -72,16 +73,27 @@ public class GuildXCreateGuild implements CMD {
 	}
 	
 	private boolean bannedName(String name) {
-		if(!name.toLowerCase().matches(".*[a-z].*"))
+		if(!isAlphanumeric(name))
 			return true;
 		if(GuildManager.bannedNames != null && !GuildManager.bannedNames.isEmpty()) {
-			for(String e : GuildManager.bannedNames) {;
+			for(String e : GuildManager.bannedNames) {
 				if(name.equalsIgnoreCase(e))
 					return true;
 					
 			}
 		}
 		return false;
+	}
+	
+	public boolean isAlphanumeric(String str)
+	{
+	    char[] charArray = str.toCharArray();
+	    for(char c:charArray)
+	    {
+	        if (!Character.isLetterOrDigit(c))
+	            return false;
+	    }
+	    return true;
 	}
 	
 

@@ -44,27 +44,39 @@ public class GuildXClaim implements CMD {
 					//Checks to make sure they are not bordering another claim. Allows for them to claim next to themselves 
 					if(!cm.chunkIsClaimed(x,z)) {
 						if(!cm.isBordering(x, z) || cm.getBorderingGuild(x, z).equalsIgnoreCase(g.toString())) {
-							Chunks c = new Chunks(x,z,g.toString());
-							/*It's a little funky:
-							 * It makes sure that their chunk arraylist isn't null,
-							 * or else it will error out. So, if it is, a new arraylist of chunks is made
-							 * and the guild's chunks is set to that. If it's not, it simply adds the chunk to the guild's chunklist.
-							 */
-							ArrayList<Chunks> chunks = new ArrayList<Chunks>();
-							chunks = g.getChunks();
 							
-							if(chunks != null && !chunks.isEmpty()) {
+							//If chunks is null, the guild obviously doesn't have chunks
+							if(g.getChunks() == null) {
+								Chunks c = new Chunks(x,z,g.toString());
+								ArrayList<Chunks> chunks = new ArrayList<Chunks>();
 								chunks.add(c);
-							}
-							else {
-								chunks = new ArrayList<Chunks>();
-								chunks.add(c);
+								g.setChunks(chunks);
+								createBorder(chunk);
+								msg.print("msg.guild.claimed", sender, g.toString(),null, null);
 							}
 							
-							g.setChunks(chunks);
-							createBorder(chunk);
-							msg.print("msg.guild.claimed", sender, g.toString(),null, null);
-							
+							else if(!(g.getChunks().size() + 1 > Plugin.plugin.getConfig().getInt("default.guild.maxchunks"))) {
+								Chunks c = new Chunks(x,z,g.toString());
+								/*It's a little funky:
+								 * It makes sure that their chunk arraylist isn't null,
+								 * or else it will error out. So, if it is, a new arraylist of chunks is made
+								 * and the guild's chunks is set to that. If it's not, it simply adds the chunk to the guild's chunklist.
+								 */
+								ArrayList<Chunks> chunks = new ArrayList<Chunks>();
+								chunks = g.getChunks();
+								
+								if(chunks != null && !chunks.isEmpty()) {
+									chunks.add(c);
+								}
+								else {
+									chunks = new ArrayList<Chunks>();
+									chunks.add(c);
+								}
+								
+								g.setChunks(chunks);
+								createBorder(chunk);
+								msg.print("msg.guild.claimed", sender, g.toString(),null, null);
+							}else msg.print("msg.guild.error.maxchunksclaimed", sender, null, null, null);
 						}else msg.print("msg.guild.error.bordering", sender, null, null, cm.getBorderingGuild(x, z));
 					}else msg.print("msg.guild.error.chunktaken", sender, null, null, cm.getChunkOwner(x, z));
 				}else msg.print("msg.guild.error.ranktoolow", sender, null, null, null);
