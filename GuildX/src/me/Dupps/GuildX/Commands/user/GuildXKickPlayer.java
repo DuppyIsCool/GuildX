@@ -30,14 +30,24 @@ public class GuildXKickPlayer implements CMD{
 						
 						if(gm.isInGuild(vuuid)) { //Checks if the victim is in a guild
 							if(higherRank(puuid,vuuid)) { //Checks if sender is a higher rank than victim & if they are in the same guild
+								
 								//Removes victim from guild
-								ArrayList<String> members = new ArrayList<String>();
-								members = g.getMembers();
-								members.remove(vuuid);
-								g.setMembers(members);
-								msg.print("msg.guild.kickedplayer", sender, p.getName(), null, args[1]);
+								if(g.getAdmins().contains(vuuid)) {
+									ArrayList<String> admins = new ArrayList<String>();
+									admins = g.getAdmins();
+									admins.remove(vuuid);
+									g.setMembers(admins);
+									msg.print("msg.guild.kickedplayer", sender, p.getName(), null, args[1]);
+								}
+								if(g.getMembers().contains(vuuid)) {
+									ArrayList<String> members = new ArrayList<String>();
+									members = g.getMembers();
+									members.remove(vuuid);
+									g.setMembers(members);
+									msg.print("msg.guild.kickedplayer", sender, p.getName(), null, args[1]);
+								}
 							
-							}else msg.print("msg.guild.error.nothighrank", sender, null, null, null);
+							}else msg.print("msg.guild.error.ranktoolow", sender, null, null, null);
 						}else msg.print("msg.guild.error.vnotinguild", sender, null, null, args[1]);
 					}else msg.print("msg.guild.error.notinguild", sender, null, null, null);
 				}else msg.print("msg.guild.error.kickself", sender, null, null, null);
