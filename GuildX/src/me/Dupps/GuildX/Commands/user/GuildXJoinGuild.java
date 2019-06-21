@@ -37,7 +37,7 @@ public class GuildXJoinGuild implements CMD {
 
 	@Override
 	public String getUsage() {
-		return "/g join (name)";
+		return "/guild join (name)";
 	}
 
 	@Override
