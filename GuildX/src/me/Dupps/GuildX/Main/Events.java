@@ -12,6 +12,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -133,5 +134,23 @@ public class Events implements Listener{
 			
 		}
 	}
+	
+	@EventHandler
+    public void onPlayerChat(AsyncPlayerChatEvent e) {
+              
+        Player p = e.getPlayer();
+        
+        if (gm.isInGuild(p.getUniqueId().toString())){ 
+             String message = e.getMessage();
+             e.setFormat(ChatColor.GOLD +""+ gm.getGuildwPlayer(p.getUniqueId().toString()) 
+             + " "+ChatColor.YELLOW + p.getName() + " " + ChatColor.RESET + "" + message);
+        }
+        else {
+        	String message = e.getMessage();
+            e.setFormat(ChatColor.YELLOW + p.getName() + " " + ChatColor.RESET + "" + message);
+        }
+            
+    }
+	
 
 }

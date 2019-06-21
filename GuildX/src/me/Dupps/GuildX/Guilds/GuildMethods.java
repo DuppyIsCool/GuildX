@@ -178,13 +178,11 @@ public class GuildMethods {
 				ArrayList<String> members = g.getMembers();
 				try {
 					members.add(puuid);
-					System.out.println("added "+puuid+ " to guild "+g.toString());
 					g.setMembers(members);
 				}
 				catch(NullPointerException e) {
 					ArrayList<String> memb = new ArrayList<String>();
 					memb.add(puuid);
-					System.out.println("added "+puuid+ " to guild "+g.toString());
 					g.setMembers(memb);
 				}
 			}
