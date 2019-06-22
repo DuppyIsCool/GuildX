@@ -3,6 +3,7 @@ package me.Dupps.GuildX.Main;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -18,6 +19,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 import me.Dupps.GuildX.Chunks.ChunkMethods;
+import me.Dupps.GuildX.Commands.user.GuildXHome;
 import me.Dupps.GuildX.Guilds.Guild;
 import me.Dupps.GuildX.Guilds.GuildMethods;
 import me.Dupps.GuildX.Managers.ChunkBorderManager;
@@ -82,6 +84,24 @@ public class Events implements Listener{
 		else if(cm.chunkIsClaimed(fromx, fromz) && !cm.chunkIsClaimed(endx, endz)) {
 			p.sendTitle("", ChatColor.GRAY + "Wilderness", 2, 15, 2);
 		}
+		
+	}
+	
+	@EventHandler
+	public void onMove(PlayerMoveEvent e) {
+		Location movedFrom = e.getFrom();
+        Location movedTo = e.getTo();
+        Player p = e.getPlayer();
+        //Checks if the player moved, ignoring yaw and pitch
+        if (movedFrom.getBlockX() != movedTo.getBlockX() || 
+        		movedFrom.getBlockY() != movedTo.getBlockY() || 
+        		movedFrom.getBlockZ() != movedTo.getBlockZ()) {
+        	
+        	if(GuildXHome.homemap.containsKey(p)) {
+    			GuildXHome.homemap.remove(p);
+    			e.getPlayer().sendMessage(ChatColor.RED + "Teleportation canceled you moved!");
+    		}
+        }
 	}
 	
 	@EventHandler

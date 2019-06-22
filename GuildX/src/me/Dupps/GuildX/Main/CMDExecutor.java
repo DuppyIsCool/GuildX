@@ -13,6 +13,7 @@ import me.Dupps.GuildX.Commands.user.GuildXCreateGuild;
 import me.Dupps.GuildX.Commands.user.GuildXDeleteGuild;
 import me.Dupps.GuildX.Commands.user.GuildXDeleteOtherGuild;
 import me.Dupps.GuildX.Commands.user.GuildXDemotePlayer;
+import me.Dupps.GuildX.Commands.user.GuildXHome;
 import me.Dupps.GuildX.Commands.user.GuildXInfo;
 import me.Dupps.GuildX.Commands.user.GuildXInvitePlayer;
 import me.Dupps.GuildX.Commands.user.GuildXJoinGuild;
@@ -20,6 +21,7 @@ import me.Dupps.GuildX.Commands.user.GuildXKickPlayer;
 import me.Dupps.GuildX.Commands.user.GuildXLeaveGuild;
 import me.Dupps.GuildX.Commands.user.GuildXList;
 import me.Dupps.GuildX.Commands.user.GuildXPromotePlayer;
+import me.Dupps.GuildX.Commands.user.GuildXSetHome;
 import me.Dupps.GuildX.Commands.user.GuildXUnclaim;
 import me.Dupps.GuildX.Commands.user.GuildXUnclaimAll;
 import me.Dupps.GuildX.Guilds.GuildMethods;
@@ -43,6 +45,8 @@ public class CMDExecutor implements CommandExecutor{
 	private GuildXInfo info = new GuildXInfo();
 	private GuildXUnclaimAll unclaimall = new GuildXUnclaimAll();
 	private GuildXList list = new GuildXList();
+	private GuildXHome home = new GuildXHome();
+	private GuildXSetHome sethome = new GuildXSetHome();
 	
 	private GuildMethods gm = new GuildMethods();
 	@Override
@@ -249,6 +253,28 @@ public class CMDExecutor implements CommandExecutor{
 					return true;
 				}
 			}
+			if(args[0].equalsIgnoreCase("home")) {
+				
+				if(args.length == 1) {
+					home.Execute(sender, args);
+					return true;
+				}
+				else {
+					msg.print("error.invalidargs", sender, null, null, null);
+					return true;
+				}
+			}
+			if(args[0].equalsIgnoreCase("sethome")) {
+				
+				if(args.length == 1) {
+					sethome.Execute(sender, args);
+					return true;
+				}
+				else {
+					msg.print("error.invalidargs", sender, null, null, null);
+					return true;
+				}
+			}
 			
 			//Displays info for a guild if it's entered
 			if(gm.guildExists(args[0])) {
@@ -329,6 +355,14 @@ public class CMDExecutor implements CommandExecutor{
 		if(sender.hasPermission("guildx.reload") || sender.isOp()) {
 			commandusage.add(reload.getUsage());
 			commanddesc.add(reload.getDescription());
+		}
+		if(sender.hasPermission("guildx.home") || sender.isOp()) {
+			commandusage.add(home.getUsage());
+			commanddesc.add(home.getDescription());
+		}
+		if(sender.hasPermission("guildx.sethome") || sender.isOp()) {
+			commandusage.add(sethome.getUsage());
+			commanddesc.add(sethome.getDescription());
 		}
 		
 		pagecount = commandusage.size()/amountperpage;

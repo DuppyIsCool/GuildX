@@ -15,6 +15,8 @@ msg:
         unclaimed: "&aYou have unclaimed this chunk"
         unclaimall: "&aYou have unclaimed all your guild's chunks"
         enterclaim: "&aYou have entered land owned by %rstring%"
+        sethome: "&aYou have set your home to &b(%pstring%)"
+        tpstart: "&aYou have started to teleport, do not move"
         error:
             invalidpage: "&cThat is not a valid page number"
             notinguild: "&cNot in a guild"
@@ -40,6 +42,9 @@ msg:
             noguilds: "&cThere are no guilds"
             maxplayersinguild: "&cYou have met the max amount of players in your guild"
             maxchunksclaimed: "&cYou have claimed the max amount of chunks"
+            cannotsethome: "&cYou can only set your home in chunks you own"
+            nohome: "&cYour guild does not have a set home"
+            alreadyteleporting: "&cYou are already teleporting!"
 #Error messages (general errors
 error:
     nopermission: "&cNo perm"

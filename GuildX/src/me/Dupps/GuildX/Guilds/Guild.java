@@ -2,6 +2,8 @@ package me.Dupps.GuildX.Guilds;
 
 import java.util.ArrayList;
 
+import org.bukkit.Location;
+
 import me.Dupps.GuildX.Chunks.Chunks;
 
 
@@ -10,6 +12,7 @@ public class Guild {
 	private ArrayList<String> members,admins;
 	private ArrayList<Chunks> chunks;
 	private int lives,raidtimer;
+	private Location home;
 	private boolean raidable;
 	
 	public String getGuildname() {
@@ -65,5 +68,11 @@ public class Guild {
 	}
 	public void setRaidtimer(int raidtimer) {
 		this.raidtimer = raidtimer;
+	}
+	public Location getHome() {
+		return home;
+	}
+	public void setHome(Location home) {
+		this.home = home;
 	}
 }

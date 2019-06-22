@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+
 import me.Dupps.GuildX.Chunks.Chunks;
 import me.Dupps.GuildX.Guilds.Guild;
 import me.Dupps.GuildX.Main.Plugin;
@@ -22,6 +25,15 @@ public class GuildManager {
 			g.setMembers((ArrayList<String>) cfgm.getGuilds().getStringList(guild + ".members"));
 			g.setAdmins((ArrayList<String>) cfgm.getGuilds().getStringList(guild + ".admins"));
 			g.setLives(cfgm.getGuilds().getInt(guild + ".lives"));
+			
+			//Set home
+			if(cfgm.getGuilds().getConfigurationSection(guild + ".home") != null) {
+				Location home = new Location(Bukkit.getServer().getWorld(cfgm.getGuilds().getString(guild + ".home.world")),
+						cfgm.getGuilds().getInt(guild + ".home.x"),
+						cfgm.getGuilds().getInt(guild + ".home.y"),
+						cfgm.getGuilds().getInt(guild + ".home.z"));
+				g.setHome(home);
+			}
 			
 			//Adds chunks
 			ArrayList<Chunks> chunks = new ArrayList<Chunks>();
@@ -52,11 +64,20 @@ public class GuildManager {
 			cfgm.getGuilds().set(g.toString() + ".admins",g.getAdmins());
 			cfgm.getGuilds().set(g.toString() + ".lives",g.getLives());
 			
+			//Puts chunks into config
 			if(g.getChunks() != null && !g.getChunks().isEmpty()) {
 				for(Chunks c : g.getChunks()) {
 					cfgm.getGuilds().set(g.toString() + ".chunks." + c.toString() + ".x", c.getX());
 					cfgm.getGuilds().set(g.toString() + ".chunks." + c.toString() + ".z", c.getZ());
 				}
+			}
+			
+			if(g.getHome() != null) {
+				Location loc = g.getHome();
+				cfgm.getGuilds().set(g.toString() + ".home.x",loc.getBlockX());
+				cfgm.getGuilds().set(g.toString() + ".home.y",loc.getBlockY());
+				cfgm.getGuilds().set(g.toString() + ".home.z",loc.getBlockZ());
+				cfgm.getGuilds().set(g.toString() + ".home.world",loc.getWorld().getName());
 			}
 		}
 	}
