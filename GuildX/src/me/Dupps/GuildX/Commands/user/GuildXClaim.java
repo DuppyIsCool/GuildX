@@ -151,7 +151,7 @@ public class GuildXClaim implements CMD {
 			blockmap.put(b, time);
 		}
 		
-		BukkitTask task = new ChunkBorder(time+1,blockmap).runTaskTimer(Plugin.plugin, 0, 20);
+		BukkitTask task = new ChunkBorder(time+1,time * 5, c,blockmap).runTaskTimer(Plugin.plugin, 0, 20);
 		chunkmap.put(c, task);
 		
 		
