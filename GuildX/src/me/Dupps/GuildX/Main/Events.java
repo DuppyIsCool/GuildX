@@ -1,7 +1,6 @@
 package me.Dupps.GuildX.Main;
 
 
-import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -17,15 +16,15 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.scheduler.BukkitTask;
 
 import me.Dupps.GuildX.Chunks.ChunkMethods;
 import me.Dupps.GuildX.Commands.user.GuildXHome;
 import me.Dupps.GuildX.Guilds.Guild;
 import me.Dupps.GuildX.Guilds.GuildMethods;
-import me.Dupps.GuildX.Managers.ChunkBorderManager;
 import me.Dupps.GuildX.Managers.ConfigManager;
-import me.Dupps.GuildX.Managers.GuildManager;
 import me.Dupps.GuildX.Managers.MessageManager;
+import me.Dupps.GuildX.Timers.Raid;
 import net.md_5.bungee.api.ChatColor;
 
 public class Events implements Listener{
@@ -40,7 +39,6 @@ public class Events implements Listener{
 			e.setCancelled(true);
 			b.setType((Material) b.getMetadata("SPAWNED").get(0).value());
 			b.removeMetadata("SPAWNED", Plugin.plugin);
-			ChunkBorderManager.removeBlock(b);
 		}
 		Chunk c = e.getBlock().getChunk();
 		if(cm.chunkIsClaimed(c.getX(), c.getZ()) && !e.getPlayer().isOp() && !gm.getGuildwName(cm.getChunkOwner(c.getX(), c.getZ())).isRaidable())
@@ -98,6 +96,7 @@ public class Events implements Listener{
         		movedFrom.getBlockZ() != movedTo.getBlockZ()) {
         	
         	if(GuildXHome.homemap.containsKey(p)) {
+        		GuildXHome.homemap.get(p).cancel();
     			GuildXHome.homemap.remove(p);
     			e.getPlayer().sendMessage(ChatColor.RED + "Teleportation canceled you moved!");
     		}
@@ -145,8 +144,8 @@ public class Events implements Listener{
 				if((g.getLives()-1) == 0) {
 					g.setLives(0);
 					g.setRaidable(true);
-					Bukkit.getServer().broadcastMessage(ChatColor.RED + ""+ChatColor.BOLD + g.toString() + " is now raidable!");
-					GuildManager.raidableGuilds.put(g, Plugin.plugin.getConfig().getInt("default.guild.raidtime"));
+					@SuppressWarnings("unused")
+					BukkitTask task = new Raid(Plugin.plugin.getConfig().getInt("default.guild.raidtime")+1,g).runTaskTimer(Plugin.plugin, 0, 20);
 				}
 				else if ((g.getLives()-1) > 0)
 					g.setLives(g.getLives()-1);

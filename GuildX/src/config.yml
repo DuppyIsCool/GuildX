@@ -45,6 +45,7 @@ msg:
             cannotsethome: "&cYou can only set your home in chunks you own"
             nohome: "&cYour guild does not have a set home"
             alreadyteleporting: "&cYou are already teleporting!"
+            chunkclaimedrecently: "&cThis chunk has been claimed recently!"
 #Error messages (general errors
 error:
     nopermission: "&cNo perm"

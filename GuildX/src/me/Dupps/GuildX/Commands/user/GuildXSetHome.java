@@ -32,7 +32,7 @@ public class GuildXSetHome implements CMD {
 					if(cm.chunkIsClaimed(c.getX(), c.getZ()) && cm.getChunkOwner(c.getX(), c.getZ()).equalsIgnoreCase(g.toString())) {
 						
 						g.setHome(loc);
-						msg.print("msg.guild.sethome", sender, loc.getBlockX() + ","+loc.getBlockX() +","+loc.getBlockZ(), null, null);
+						msg.print("msg.guild.sethome", sender, loc.getBlockX() + ","+loc.getBlockY() +","+loc.getBlockZ(), null, null);
 					}
 					else
 						msg.print("msg.guild.error.cannotsethome", sender, null, null, null);
