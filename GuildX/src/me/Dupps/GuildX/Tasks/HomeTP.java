@@ -24,7 +24,6 @@ public class HomeTP extends BukkitRunnable{
     public void run() {
         // What you want to schedule goes here
         if (counter > 0) { 
-        	System.out.println("Running hometp");
         	p.sendTitle(ChatColor.BLUE + "Teleporting...",ChatColor.DARK_BLUE+""+counter--+"", 1, 20, 1);
         } else {
         	Location home = (Location) p.getMetadata("homeloc").get(0).value();
