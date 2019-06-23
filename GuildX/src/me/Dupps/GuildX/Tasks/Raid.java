@@ -1,4 +1,4 @@
-package me.Dupps.GuildX.Timers;
+package me.Dupps.GuildX.Tasks;
 
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;

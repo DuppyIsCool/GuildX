@@ -18,7 +18,7 @@ import me.Dupps.GuildX.Guilds.Guild;
 import me.Dupps.GuildX.Guilds.GuildMethods;
 import me.Dupps.GuildX.Main.Plugin;
 import me.Dupps.GuildX.Managers.MessageManager;
-import me.Dupps.GuildX.Timers.ChunkBorder;
+import me.Dupps.GuildX.Tasks.ChunkBorder;
 
 public class GuildXClaim implements CMD {
 	GuildMethods gm = new GuildMethods();

@@ -24,7 +24,7 @@ import me.Dupps.GuildX.Guilds.Guild;
 import me.Dupps.GuildX.Guilds.GuildMethods;
 import me.Dupps.GuildX.Managers.ConfigManager;
 import me.Dupps.GuildX.Managers.MessageManager;
-import me.Dupps.GuildX.Timers.Raid;
+import me.Dupps.GuildX.Tasks.Raid;
 import net.md_5.bungee.api.ChatColor;
 
 public class Events implements Listener{

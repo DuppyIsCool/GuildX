@@ -1,4 +1,4 @@
-package me.Dupps.GuildX.Timers;
+package me.Dupps.GuildX.Tasks;
 
 import java.util.HashMap;
 

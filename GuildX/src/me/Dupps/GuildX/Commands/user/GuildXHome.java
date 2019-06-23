@@ -14,7 +14,7 @@ import me.Dupps.GuildX.Guilds.Guild;
 import me.Dupps.GuildX.Guilds.GuildMethods;
 import me.Dupps.GuildX.Main.Plugin;
 import me.Dupps.GuildX.Managers.MessageManager;
-import me.Dupps.GuildX.Timers.HomeTP;
+import me.Dupps.GuildX.Tasks.HomeTP;
 
 public class GuildXHome implements CMD {
 	public static HashMap<Player,BukkitTask> homemap = new HashMap<Player,BukkitTask>();
