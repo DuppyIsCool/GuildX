@@ -9,6 +9,7 @@ import me.Dupps.GuildX.Commands.CMD;
 import me.Dupps.GuildX.Guilds.Guild;
 import me.Dupps.GuildX.Guilds.GuildMethods;
 import me.Dupps.GuildX.Managers.MessageManager;
+import me.Dupps.GuildX.Managers.TeamManager;
 
 public class GuildXLeaveGuild implements CMD{
 	private GuildMethods gm = new GuildMethods();
@@ -30,19 +31,20 @@ public class GuildXLeaveGuild implements CMD{
 				 if(gm.isMember(puuid)) {
 					 members.remove(puuid);
 					 g.setMembers(members);
+					 TeamManager.removePlayer(p, g.toString());
 					 msg.print("msg.guild.leftguild", sender, g.getGuildname(), null, null);
 				 }
 				 
 				 if(gm.isAdmin(puuid)) {
 					 admins.remove(puuid);
 					 g.setAdmins(admins);
+					 TeamManager.removePlayer(p, g.toString());
 					 msg.print("msg.guild.leftguild", sender, g.getGuildname(), null, null);
 				 }
 				
 				 if(gm.isLeader(puuid)) {
 					 msg.print("msg.guild.error.leaveasleader", sender, null, null, null);
 				 }
-				
 				
 				
 			}else msg.print("msg.guild.error.notinguild", sender, null, null, null);

@@ -88,9 +88,12 @@ public class GuildManager {
 
 	public static void addGuild(Guild g) {
 		guilds.add(g);
+		if(!TeamManager.teamExists(g.toString()))
+			TeamManager.createTeam(g.toString());
 	}
 	
 	public static void removeGuild(Guild g) {
+		TeamManager.removeTeam(g.toString());
 		guilds.remove(g);
 	}
 	

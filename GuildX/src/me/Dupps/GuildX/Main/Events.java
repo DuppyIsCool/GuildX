@@ -161,12 +161,12 @@ public class Events implements Listener{
         
         if (gm.isInGuild(p.getUniqueId().toString())){ 
              String message = e.getMessage();
-             e.setFormat(ChatColor.GOLD +""+ gm.getGuildwPlayer(p.getUniqueId().toString()) 
-             + " "+ChatColor.YELLOW + p.getName() + " " + ChatColor.RESET + "" + message);
+             e.setFormat(ChatColor.BLUE +"["+ ChatColor.AQUA + gm.getGuildwPlayer(p.getUniqueId().toString()) 
+             + ChatColor.BLUE +"] "+ChatColor.GRAY + p.getName() + " " + ChatColor.RESET + message);
         }
         else {
         	String message = e.getMessage();
-            e.setFormat(ChatColor.YELLOW + p.getName() + " " + ChatColor.RESET + "" + message);
+            e.setFormat(ChatColor.GRAY+p.getName() + " " + ChatColor.RESET + "" + message);
         }
             
     }

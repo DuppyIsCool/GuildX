@@ -4,7 +4,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import me.Dupps.GuildX.Commands.CMD;
-import me.Dupps.GuildX.Guilds.Guild;
 import me.Dupps.GuildX.Guilds.GuildMethods;
 import me.Dupps.GuildX.Managers.GuildManager;
 import me.Dupps.GuildX.Managers.MessageManager;
@@ -24,10 +23,9 @@ public class GuildXDeleteGuild implements CMD {
 				
 				if(gm.isInGuild(puuid)) {
 					if(gm.isLeader(puuid)) {
-						msg.print("msg.guild.deleted", p, gm.getGuildwPlayer(puuid).toString(), null, null);
+						String guild = gm.getGuildwPlayer(puuid).toString();
 						GuildManager.removeGuild(gm.getGuildwPlayer(puuid));
-						for(Guild g : GuildManager.getGuilds())
-							System.out.println(g.toString());
+						msg.print("msg.guild.deleted", p, guild, null, null);
 					}else msg.print("msg.guild.error.ranktoolow", sender, gm.getGuildwPlayer(puuid).toString(), null, null);
 				}else msg.print("msg.guild.error.notinguild", sender, null, null, null);
 			}else msg.print("error.nopermission", sender, null, null, null);

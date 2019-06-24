@@ -10,7 +10,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitTask;
-
 import me.Dupps.GuildX.Chunks.ChunkMethods;
 import me.Dupps.GuildX.Chunks.Chunks;
 import me.Dupps.GuildX.Commands.CMD;
@@ -74,7 +73,6 @@ public class GuildXClaim implements CMD {
 										chunks = new ArrayList<Chunks>();
 										chunks.add(c);
 									}
-									
 									g.setChunks(chunks);
 									createBorder(chunk);
 									msg.print("msg.guild.claimed", sender, g.toString(),null, null);

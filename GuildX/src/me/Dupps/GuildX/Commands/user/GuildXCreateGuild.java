@@ -11,6 +11,7 @@ import me.Dupps.GuildX.Guilds.GuildMethods;
 import me.Dupps.GuildX.Main.Plugin;
 import me.Dupps.GuildX.Managers.GuildManager;
 import me.Dupps.GuildX.Managers.MessageManager;
+import me.Dupps.GuildX.Managers.TeamManager;
 
 public class GuildXCreateGuild implements CMD {
 	private MessageManager msg = new MessageManager();
@@ -37,10 +38,9 @@ public class GuildXCreateGuild implements CMD {
 								guild.setLives(Plugin.plugin.getConfig().getInt("default.guild.lives"));
 								guild.setAdmins(admins);
 								guild.setMembers(members);
-								
 								//Add Guild to GuildManager
-								GuildManager.addGuild(guild);
-								
+								GuildManager.addGuild(guild); 
+								TeamManager.addPlayer(p, guild.toString());
 								msg.print("msg.guild.created", p, guild.toString(), null, null);
 							}else msg.print("msg.guild.error.bannedguildname", p,args[1], null, null);
 						}else msg.print("msg.guild.error.nametaken", sender, null, null, args[1]);

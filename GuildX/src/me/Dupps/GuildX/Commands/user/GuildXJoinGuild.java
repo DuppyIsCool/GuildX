@@ -7,6 +7,7 @@ import me.Dupps.GuildX.Commands.CMD;
 import me.Dupps.GuildX.Guilds.GuildMethods;
 import me.Dupps.GuildX.Managers.InviteManager;
 import me.Dupps.GuildX.Managers.MessageManager;
+import me.Dupps.GuildX.Managers.TeamManager;
 
 public class GuildXJoinGuild implements CMD {
 	MessageManager msg = new MessageManager();
@@ -23,6 +24,7 @@ public class GuildXJoinGuild implements CMD {
 					if(gm.guildExists(args[1])) {
 						InviteManager.deleteInvite(p.getName(), args[1]);
 						gm.addPlayerToGuild(puuid, args[1]);
+						TeamManager.addPlayer(p, args[1]);
 						msg.print("msg.guild.joined", sender, gm.getGuildwPlayer(puuid).toString(), null, null);
 					}else msg.print("msg.guild.error.doesnotexist", sender, null, null, args[1]);
 				}else msg.print("msg.guild.error.noinvite", sender, null, null, args[1]);
