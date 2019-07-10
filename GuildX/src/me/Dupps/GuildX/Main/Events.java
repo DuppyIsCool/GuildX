@@ -41,8 +41,15 @@ public class Events implements Listener{
 			b.removeMetadata("SPAWNED", Plugin.plugin);
 		}
 		Chunk c = e.getBlock().getChunk();
-		if(cm.chunkIsClaimed(c.getX(), c.getZ()) && !e.getPlayer().isOp() && !gm.getGuildwName(cm.getChunkOwner(c.getX(), c.getZ())).isRaidable())
-			e.setCancelled(true);
+		if(cm.chunkIsClaimed(c.getX(), c.getZ()) && !e.getPlayer().isOp() && !gm.getGuildwName(cm.getChunkOwner(c.getX(), c.getZ())).isRaidable()) {
+			if(gm.isInGuild(e.getPlayer().getUniqueId().toString())) {
+				if(!cm.getChunkOwner(c.getX(), c.getZ()).equalsIgnoreCase(gm.getGuildwPlayer(e.getPlayer().getUniqueId().toString()).toString()))
+					e.setCancelled(true);
+			}
+			else
+				e.setCancelled(true);
+				
+		}
 	}
 	
 	@EventHandler
@@ -51,7 +58,12 @@ public class Events implements Listener{
 			if(!e.getClickedBlock().getType().equals(Material.AIR)) {
 				Chunk c = e.getClickedBlock().getChunk();
 				if(cm.chunkIsClaimed(c.getX(), c.getZ()) && !e.getPlayer().isOp() && !gm.getGuildwName(cm.getChunkOwner(c.getX(), c.getZ())).isRaidable())
-					e.setCancelled(true);
+					if(gm.isInGuild(e.getPlayer().getUniqueId().toString())) {
+						if(!cm.getChunkOwner(c.getX(), c.getZ()).equalsIgnoreCase(gm.getGuildwPlayer(e.getPlayer().getUniqueId().toString()).toString()))
+							e.setCancelled(true);
+					}
+					else
+						e.setCancelled(true);
 			}
 		}
 	}
@@ -107,7 +119,12 @@ public class Events implements Listener{
 	public void blockPlaced(BlockPlaceEvent event) {
 		Chunk c = event.getBlock().getChunk();
 		if(cm.chunkIsClaimed(c.getX(), c.getZ()) && !event.getPlayer().isOp() && !gm.getGuildwName(cm.getChunkOwner(c.getX(), c.getZ())).isRaidable())
-			event.setCancelled(true);
+			if(gm.isInGuild(event.getPlayer().getUniqueId().toString())) {
+				if(!cm.getChunkOwner(c.getX(), c.getZ()).equalsIgnoreCase(gm.getGuildwPlayer(event.getPlayer().getUniqueId().toString()).toString()))
+					event.setCancelled(true);
+			}
+			else
+				event.setCancelled(true);
 	}
 	
 	@EventHandler
@@ -128,6 +145,7 @@ public class Events implements Listener{
 	}
 	
 	@EventHandler
+	//Used to prevent players from taking items from their guild info screens.
 	public void onPlayerClickOnItem(InventoryClickEvent e){
         if(e.getRawSlot() == e.getSlot() && e.getInventory().getTitle().equals("Guild Display")){
         	e.setCancelled(true);
@@ -136,6 +154,7 @@ public class Events implements Listener{
 	
 	@EventHandler
 	public void onPlayerDeath(PlayerDeathEvent e) {
+		//This is used when a player dies, their guild loses one life.
 		if(e.getEntity() instanceof Player) {
 			Player p = (Player) e.getEntity();
 			
@@ -158,15 +177,18 @@ public class Events implements Listener{
     public void onPlayerChat(AsyncPlayerChatEvent e) {
               
         Player p = e.getPlayer();
-        
-        if (gm.isInGuild(p.getUniqueId().toString())){ 
-             String message = e.getMessage();
-             e.setFormat(ChatColor.BLUE +"["+ ChatColor.AQUA + gm.getGuildwPlayer(p.getUniqueId().toString()) 
-             + ChatColor.BLUE +"] "+ChatColor.GRAY + p.getName() + " " + ChatColor.RESET + message);
-        }
-        else {
-        	String message = e.getMessage();
-            e.setFormat(ChatColor.GRAY+p.getName() + " " + ChatColor.RESET + "" + message);
+        if(Plugin.plugin.getConfig().getBoolean("default.guild.chatformat")) {
+        	
+	        if (gm.isInGuild(p.getUniqueId().toString())){ 
+	             String message = e.getMessage();
+	             message = message.replaceAll("%guild%", gm.getGuildwPlayer(p.getUniqueId().toString()).toString());
+	             e.setMessage(message);
+	        }
+	        else {
+	        	String message = e.getMessage();
+	            message = message.replaceAll("%guild%", "");
+	            e.setMessage(message);
+	        }
         }
             
     }

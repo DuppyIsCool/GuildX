@@ -58,6 +58,7 @@ error:
 #Guild default values
 default:
     guild:
+        chatformat: true
         lives: 10
         namelength: 14
         raidtime: 100
