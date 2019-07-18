@@ -48,18 +48,18 @@ msg:
             chunkclaimedrecently: "&9Guilds> &7This chunk has been claimed recently!"
 #Error messages (general errors
 error:
-    nopermission: "&9Error> &7You do not have permission to execute this command"
-    playeronly: "&9Error> &7Only players may use this command"
-    invalidargs: "&9Error> &7Invalid arguments see '/guild help' for more info"
-    playernotonline: "&9Error> &7'%rstring%'&7 is not online"
-    nocommand: "&9Error> &7Invalid guild command"
-    noplayer: "&9Error> &7'%rstring%' is not a real player"
+    nopermission: "&9Guild> &7You do not have permission to execute this command"
+    playeronly: "&9Guild> &7Only players may use this command"
+    invalidargs: "&9Guild> &7Invalid arguments see '/guild help' for more info"
+    playernotonline: "&9Guild> &7'%rstring%'&7 is not online"
+    nocommand: "&9Guild> &7Invalid guild command"
+    noplayer: "&9Guild> &7'%rstring%' is not a real player"
 
 #Guild default values
 default:
     guild:
         chatformat: true
-        guildprefix: [%guild%]
+        guildprefix: "[%guild%]"
         lives: 10
         namelength: 14
         raidtime: 100
