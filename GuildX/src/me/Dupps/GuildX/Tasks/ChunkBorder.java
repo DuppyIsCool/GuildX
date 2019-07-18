@@ -43,26 +43,17 @@ public class ChunkBorder extends BukkitRunnable {
 
 	
 	private void updateBorder() {
-		boolean clearmap = false;
-		int counter = 0;
-    	for(Block b : blockmap.keySet()) {
-    		if(blockmap.get(b) <= 0) {
-    			b.setType((Material) b.getMetadata("SPAWNED").get(0).value());
-    			b.removeMetadata("SPAWNED", Plugin.plugin);
-    			if(counter >= blockmap.size())
-    				clearmap = true;
-    			counter++;
-    		}
-    		else{
-    			blockmap.put(b, blockmap.get(b) -1);
-    		}
-    		
-    	}
-    	if(clearmap)
-    		blockmap = new HashMap<Block,Integer>();
-    	
-    	
+		if(blockmap.size() > 0) {
+	    	for(Block b : blockmap.keySet()) {
+	    		if(blockmap.get(b) <= 0) {
+	    			b.setType((Material) b.getMetadata("SPAWNED").get(0).value());
+	    			b.removeMetadata("SPAWNED", Plugin.plugin);
+	    		}
+	    		else{
+	    			blockmap.put(b, blockmap.get(b) -1);
+	    		}
+	    		
+	    	}
+		}
 	}
-	
-	
 }

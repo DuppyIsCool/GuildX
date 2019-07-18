@@ -178,10 +178,12 @@ public class Events implements Listener{
               
         Player p = e.getPlayer();
         if(Plugin.plugin.getConfig().getBoolean("default.guild.chatformat")) {
+        	String guildprefix = Plugin.plugin.getConfig().getString("default.guild.guildprefix");
         	
 	        if (gm.isInGuild(p.getUniqueId().toString())){ 
 	             String message = e.getMessage();
-	             message = message.replaceAll("%guild%", gm.getGuildwPlayer(p.getUniqueId().toString()).toString());
+	             guildprefix = guildprefix.replaceAll("%guild%", gm.getGuildwPlayer(p.getUniqueId().toString()).toString());
+	             message = message.replaceAll("%guild%", guildprefix);
 	             e.setMessage(message);
 	        }
 	        else {
