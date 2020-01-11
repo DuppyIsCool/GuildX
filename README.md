@@ -25,7 +25,7 @@ Export the project as a .jar and place into your plugins folder of your server
 * [Spigot](https://www.spigotmc.org/wiki/buildtools/) - The API used to interact with the spigot server
 
 ## Authors
-* **KLopez** - *Developer* - [DuppyIsCool](https://github.com/DuppyIsCool)
+* **KL** - *Developer* - [DuppyIsCool](https://github.com/DuppyIsCool)
 
 ## License
 This project is licensed under the Apache License 2.0
