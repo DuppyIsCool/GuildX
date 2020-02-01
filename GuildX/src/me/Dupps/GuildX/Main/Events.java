@@ -37,8 +37,6 @@ public class Events implements Listener{
 		Block b = e.getBlock();
 		if (!b.getMetadata("SPAWNED").isEmpty()) {
 			e.setCancelled(true);
-			b.setType((Material) b.getMetadata("SPAWNED").get(0).value());
-			b.removeMetadata("SPAWNED", Plugin.plugin);
 		}
 		Chunk c = e.getBlock().getChunk();
 		if(cm.chunkIsClaimed(c.getX(), c.getZ()) && !e.getPlayer().isOp() && !gm.getGuildwName(cm.getChunkOwner(c.getX(), c.getZ())).isRaidable()) {
@@ -147,7 +145,7 @@ public class Events implements Listener{
 	@EventHandler
 	//Used to prevent players from taking items from their guild info screens.
 	public void onPlayerClickOnItem(InventoryClickEvent e){
-        if(e.getRawSlot() == e.getSlot() && e.getInventory().getTitle().equals("Guild Display")){
+        if(e.getRawSlot() == e.getSlot() && e.getView().getTitle().equals("Guild Display")){
         	e.setCancelled(true);
     	}    	
     }

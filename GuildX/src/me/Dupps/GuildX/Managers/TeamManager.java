@@ -1,11 +1,14 @@
 package me.Dupps.GuildX.Managers;
 
+import java.util.ArrayList;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
 
+import me.Dupps.GuildX.Guilds.Guild;
 import net.md_5.bungee.api.ChatColor;
 
 
@@ -15,7 +18,8 @@ public class TeamManager {
 	
 	public static void createTeam(String name) {
 		Team t = gboard.registerNewTeam(name);
-		t.setPrefix(ChatColor.BLUE + "["+ChatColor.AQUA+name +ChatColor.BLUE+ "] ");
+		t.setPrefix(ChatColor.GOLD +name+ " ");
+		t.setColor(org.bukkit.ChatColor.YELLOW);
 		t.setAllowFriendlyFire(false);
 		t.setCanSeeFriendlyInvisibles(true);
 	}
@@ -53,6 +57,26 @@ public class TeamManager {
 		}
 		else
 			return null;
+	}
+	
+	public static void removeEmptyTeams() {
+		ArrayList<String> keepTeams = new ArrayList<String>();
+		ArrayList<String> removeTeams = new ArrayList<String>();
+		
+		for(Guild g : GuildManager.getGuilds()) {
+			keepTeams.add(g.getGuildname());
+		}
+		
+		for(Team t : gboard.getTeams()) {
+			if(!keepTeams.contains(t.getName())) {
+				removeTeams.add(t.getName());
+			}
+		}
+		
+		for(String e : removeTeams) {
+			gboard.getTeam(e).unregister();
+		}
+		
 	}
 	
 	

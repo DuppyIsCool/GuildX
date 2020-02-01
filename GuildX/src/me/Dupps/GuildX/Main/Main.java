@@ -9,6 +9,7 @@ import org.bukkit.scheduler.BukkitScheduler;
 import me.Dupps.GuildX.Guilds.Guild;
 import me.Dupps.GuildX.Managers.ConfigManager;
 import me.Dupps.GuildX.Managers.GuildManager;
+import me.Dupps.GuildX.Managers.TeamManager;
 
 public class Main extends JavaPlugin{
 	//Variables
@@ -32,6 +33,7 @@ public class Main extends JavaPlugin{
 		getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "GuildX has been enabled");
 		guildmanager.setupGuilds();
 		saveConfig();
+		TeamManager.removeEmptyTeams();
 	}
 	
 	public void onDisable() {
