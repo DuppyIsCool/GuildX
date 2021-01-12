@@ -8,12 +8,12 @@ GuildsX is a party plugin for Spigot 1.13.2. In this plugin you can create and j
 
 ### Prerequisites
 
-In order to edit this project, you will need the most recent version of Spigot 1.13.2 added to the project library
+In order to edit this project, you will need the most recent version of Spigot 1.15.2 added to the project library
 
 
 ### Installing
 Create an empty java project and replace the created project's source folder with the one in this repository (src).
-Then add spigot.jar (1.13.2 version) to your library
+Then add spigot.jar (1.15.2 version) to your library
 
 ## Running the tests
 
