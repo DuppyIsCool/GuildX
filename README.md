@@ -30,7 +30,3 @@ Export the project as a .jar and place into your plugins folder of your server
 ## License
 This project is licensed under the Apache License 2.0
 
-
-## Acknowledgments
-* A thank you to Xerge for aiding with BukkitAPI related questions.
-
