@@ -1,6 +1,6 @@
 # GuildsX
 
-GuildsX is a party plugin for Spigot 1.13.2. In this plugin you can create and join guilds. As a guild, you and your guildmates can claim land and raid other guilds.
+GuildsX is a party plugin for Spigot 1.15.2. In this plugin you can create and join guilds. As a guild, you and your guildmates can claim land and raid other guilds.
 
 ## Getting Started
 
